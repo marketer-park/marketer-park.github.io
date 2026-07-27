@@ -11,7 +11,7 @@ var SITE = {
   // ▼▼▼ 여기에 구글 앱스크립트 배포 주소를 붙여넣으세요 ▼▼▼
   // 형태: https://script.google.com/macros/s/AKfycb.....(긴 문자열)...../exec
   // 비워두면 자동으로 메일 앱이 열리는 방식으로 작동합니다.
-  sheetEndpoint: ''
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxT-aaRmNvvEdQ9flYuLNEWARUXL0mlX2EYbdxM8SWFp38KgX36zdvAU9CPJT1SVYN3nw/exec'
 };
 
 /* ---------- 모바일 내비게이션 ---------- */
