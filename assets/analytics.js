@@ -7,7 +7,7 @@
       비워두면 아무것도 로드되지 않습니다 (사이트 속도 영향 없음).
    ============================================================ */
 
-var GA_ID = '';
+var GA_ID = 'G-1EEFPQLHX8';
 
 (function () {
   window.dataLayer = window.dataLayer || [];
