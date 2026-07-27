@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>무료 광고 진단 | 마케터박프로의 온라인광고 탐험기록</title>
+<meta name="description" content="운영 중인 온라인광고 계정의 구조·키워드·전환 설정을 점검하고 개선 포인트를 정리해 드립니다. 비용 없이, 계약 조건 없이 진행합니다.">
+<link rel="canonical" href="https://marketer-park.github.io/diagnosis.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="무료 광고 진단 | 온라인광고 탐험기록">
+<meta property="og:description" content="광고 계정 구조·키워드·전환 설정 점검 리포트를 무료로 보내드립니다.">
+<meta property="og:locale" content="ko_KR">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="index.html">홈</a>
+      <a href="insights.html">탐험기록</a>
+      <a href="about.html">소개</a>
+      <a class="cta" href="diagnosis.html" aria-current="page">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-top:72px;">
+    <div class="wrap">
+      <div style="padding-bottom:48px;max-width:660px;">
+        <p class="eyebrow">Free Account Review</p>
+        <h1 style="font-family:var(--serif);font-size:clamp(30px,4.4vw,46px);font-weight:600;letter-spacing:-.045em;line-height:1.34;margin:0 0 22px;">지금 계정,<br>어디서 새고 있는지<br>찾아드립니다.</h1>
+        <p class="lede">운영 중인 광고 계정을 열어 구조·키워드·전환 설정을 확인하고, 개선 포인트를 문서로 정리해 보내드립니다. 비용은 없고 계약을 전제로 하지 않습니다.</p>
+      </div>
+    </div>
+    <div class="wrap"><hr></div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="form-grid">
+
+        <!-- 좌: 안내 -->
+        <div>
+          <p class="eyebrow">무엇을 보나요</p>
+          <ul class="checklist">
+            <li>계정·캠페인 구조가 예산 규모에 맞게 나뉘어 있는지</li>
+            <li>전환 이벤트와 GA4 연동이 실제로 정확히 집계되고 있는지</li>
+            <li>성과 없이 예산만 소진하는 키워드·소재가 있는지</li>
+            <li>입찰 전략과 순위 목표가 단가 대비 합리적인지</li>
+            <li>랜딩페이지에서 이탈이 발생하는 구간이 어디인지</li>
+            <li>채널 간 예산 배분을 조정할 여지가 있는지</li>
+          </ul>
+
+          <div class="callout" style="margin-top:34px;">
+            <span class="label">진행 방식</span>
+            <p><strong>1.</strong> 아래 폼으로 기본 정보를 남겨주세요.<br>
+            <strong>2.</strong> 영업일 기준 2일 안에 회신드립니다.<br>
+            <strong>3.</strong> 계정 열람 권한을 뷰어(읽기 전용)로 받습니다.<br>
+            <strong>4.</strong> 3~5일 내 진단 문서를 보내드립니다.</p>
+          </div>
+
+          <p style="font-size:13px;color:var(--muted-2);margin-top:22px;line-height:1.7;">
+            계정 접근은 읽기 전용 권한만 요청드리며, 설정을 임의로 변경하지 않습니다.
+            진단 후 별도 제안을 원하지 않으시면 그대로 종료됩니다.
+          </p>
+        </div>
+
+        <!-- 우: 폼 -->
+        <div>
+          <p class="eyebrow">신청서</p>
+
+          <form id="diagnosis-form" novalidate>
+            <div class="field">
+              <label for="f-name">업체명 / 담당자 *</label>
+              <input id="f-name" name="name" type="text" autocomplete="organization" placeholder="예) 000의원 김대표">
+            </div>
+
+            <div class="field">
+              <label for="f-contact">연락처 (이메일 또는 휴대폰) *</label>
+              <input id="f-contact" name="contact" type="text" autocomplete="email" placeholder="예) name@company.com">
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-industry">업종</label>
+                <select id="f-industry" name="industry">
+                  <option value="">선택해 주세요</option>
+                  <option>병원 · 의원</option>
+                  <option>학원 · 교육</option>
+                  <option>쇼핑몰 · 이커머스</option>
+                  <option>뷰티 · 미용</option>
+                  <option>부동산 · 인테리어</option>
+                  <option>법률 · 세무 · 전문직</option>
+                  <option>제조 · B2B</option>
+                  <option>기타</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="f-budget">월 광고 예산</label>
+                <select id="f-budget" name="budget">
+                  <option value="">선택해 주세요</option>
+                  <option>100만원 미만</option>
+                  <option>100~300만원</option>
+                  <option>300~700만원</option>
+                  <option>700~1,500만원</option>
+                  <option>1,500만원 이상</option>
+                  <option>아직 집행 전</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-channels">현재 집행 중인 채널</label>
+              <input id="f-channels" name="channels" type="text" placeholder="예) 네이버 파워링크, 메타, 당근">
+            </div>
+
+            <div class="field">
+              <label for="f-message">가장 답답한 점</label>
+              <textarea id="f-message" name="message" placeholder="예) 클릭은 늘었는데 문의 전화가 그대로입니다."></textarea>
+              <div class="hint">구체적으로 적어주실수록 진단이 정확해집니다.</div>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" required>
+              <span>진단 회신을 위해 입력한 정보가 수집·이용되는 데 동의합니다. 목적 달성 후 파기하며 제3자에게 제공하지 않습니다.</span>
+            </label>
+
+            <button class="btn" type="submit">진단 신청하기 <span class="arw">→</span></button>
+            <p id="form-status" style="font-size:13px;margin-top:16px;line-height:1.7;" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록 · 매주 1편 발행</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="insights.html">탐험기록</a>
+      <a href="about.html">소개</a>
+      <a href="diagnosis.html">무료 진단</a>
+      <a href="rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

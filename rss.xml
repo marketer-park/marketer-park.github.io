@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>마케터박프로의 온라인광고 탐험기록</title>
+  <link>https://marketer-park.github.io/</link>
+  <description>실제 집행 데이터로 검증한 온라인광고 실무 기록. 네이버·카카오 검색광고, 메타·구글 퍼포먼스.</description>
+  <language>ko</language>
+  <atom:link href="https://marketer-park.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+
+  <item>
+    <title>온라인광고 대행 수수료, 실제로 어디에 얼마가 붙는가</title>
+    <link>https://marketer-park.github.io/posts/agency-fee.html</link>
+    <guid>https://marketer-park.github.io/posts/agency-fee.html</guid>
+    <pubDate>Wed, 22 Jul 2026 09:00:00 +0900</pubDate>
+    <description>수수료율 10%가 전부가 아닙니다. 미디어 인센티브, 제작비, 리포팅 비용까지 구조를 갈라보면 실질 부담률이 달라집니다.</description>
+  </item>
+  <item>
+    <title>네이버 파워링크 1위, 사실 대부분에게 손해입니다</title>
+    <link>https://marketer-park.github.io/posts/powerlink-bid.html</link>
+    <guid>https://marketer-park.github.io/posts/powerlink-bid.html</guid>
+    <pubDate>Wed, 15 Jul 2026 09:00:00 +0900</pubDate>
+    <description>순위와 전환은 비례하지 않습니다. 입찰 순위를 정하는 실무 기준을 정리했습니다.</description>
+  </item>
+  <item>
+    <title>메타 광고 CBO와 ABO, 예산 규모가 답을 정합니다</title>
+    <link>https://marketer-park.github.io/posts/meta-cbo-abo.html</link>
+    <guid>https://marketer-park.github.io/posts/meta-cbo-abo.html</guid>
+    <pubDate>Wed, 08 Jul 2026 09:00:00 +0900</pubDate>
+    <description>어느 쪽이 좋냐는 질문은 틀렸습니다. 월 예산과 소재 개수에 따라 정답이 바뀝니다.</description>
+  </item>
+</channel>
+</rss>
