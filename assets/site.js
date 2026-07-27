@@ -151,8 +151,10 @@ var SITE = {
       .then(function (res) {
         if (res && res.ok === false) throw new Error(res.error || 'fail');
         form.reset();
-        lock(false);
-        say('신청이 접수되었습니다. 영업일 기준 2일 안에 회신드리겠습니다.', 'ok');
+        say('접수되었습니다. 잠시만 기다려 주세요…', 'ok');
+        // 완료 페이지로 이동 (전환 측정 지점)
+        location.href = 'thanks.html?i=' + encodeURIComponent(get('industry'))
+                      + '&b=' + encodeURIComponent(get('budget'));
       })
       .catch(function () {
         lock(false);
