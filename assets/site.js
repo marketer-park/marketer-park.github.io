@@ -5,14 +5,13 @@
    ============================================================ */
 
 var SITE = {
-  // 문의를 받을 이메일
+  // 문의를 받을 이메일 (전송 실패 시 안내용으로 표시됩니다)
   email: 'enter218@gmail.com',
 
-  // 폼 전송 방식
-  //  'mailto'    → 별도 가입 없이 즉시 작동. 메일 앱이 열립니다. (기본값, 무료)
-  //  'formspree' → formspree.io 무료 가입 후 받은 주소를 formEndpoint에 넣으세요.
-  formMode: 'mailto',
-  formEndpoint: '' // 예: 'https://formspree.io/f/xxxxxxxx'
+  // ▼▼▼ 여기에 구글 앱스크립트 배포 주소를 붙여넣으세요 ▼▼▼
+  // 형태: https://script.google.com/macros/s/AKfycb.....(긴 문자열)...../exec
+  // 비워두면 자동으로 메일 앱이 열리는 방식으로 작동합니다.
+  sheetEndpoint: ''
 };
 
 /* ---------- 모바일 내비게이션 ---------- */
@@ -61,25 +60,27 @@ var SITE = {
   if (!form) return;
 
   var status = document.querySelector('#form-status');
+  var btn = form.querySelector('button[type="submit"]');
+  var btnText = btn ? btn.innerHTML : '';
 
-  function say(msg, bad) {
+  function say(msg, kind) {
     if (!status) return;
-    status.textContent = msg;
-    status.style.color = bad ? '#96421F' : '#3A3A30';
+    status.innerHTML = msg;
+    status.style.color = kind === 'bad' ? '#96421F'
+                       : kind === 'ok'  ? '#2F6B3A'
+                       : '#3A3A30';
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  function lock(on) {
+    if (!btn) return;
+    btn.disabled = on;
+    btn.style.opacity = on ? '.55' : '';
+    btn.style.cursor = on ? 'default' : '';
+    btn.innerHTML = on ? '보내는 중…' : btnText;
+  }
 
-    var data = new FormData(form);
-    function get(k) { return (data.get(k) || '').toString().trim(); }
-
-    if (!get('name') || !get('contact')) {
-      say('업체명(담당자)과 연락처는 꼭 입력해 주세요.', true);
-      return;
-    }
-
-    var lines = [
+  function mailtoFallback(get) {
+    var body = [
       '■ 업체 / 담당자: ' + get('name'),
       '■ 연락처: ' + get('contact'),
       '■ 업종: ' + (get('industry') || '-'),
@@ -92,28 +93,73 @@ var SITE = {
       '— 온라인광고 탐험기록 진단 신청'
     ].join('\n');
 
-    if (SITE.formMode === 'formspree' && SITE.formEndpoint) {
-      say('보내는 중…');
-      fetch(SITE.formEndpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data
-      }).then(function (r) {
-        if (!r.ok) throw new Error('fail');
-        form.reset();
-        say('신청이 접수되었습니다. 영업일 기준 2일 안에 회신드리겠습니다.');
-      }).catch(function () {
-        say('전송에 실패했습니다. ' + SITE.email + ' 로 직접 보내주셔도 됩니다.', true);
-      });
-      return;
-    }
-
     window.location.href =
       'mailto:' + SITE.email +
       '?subject=' + encodeURIComponent('[광고 진단 신청] ' + get('name')) +
-      '&body=' + encodeURIComponent(lines);
+      '&body=' + encodeURIComponent(body);
+  }
 
-    say('메일 앱이 열립니다. 내용 확인 후 전송해 주세요. 열리지 않으면 ' + SITE.email + ' 로 보내주시면 됩니다.');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var data = new FormData(form);
+    function get(k) { return (data.get(k) || '').toString().trim(); }
+
+    // 필수값
+    if (!get('name') || !get('contact')) {
+      say('업체명(담당자)과 연락처는 꼭 입력해 주세요.', 'bad');
+      return;
+    }
+    // 개인정보 동의
+    var agree = form.querySelector('.consent input[type="checkbox"]');
+    if (agree && !agree.checked) {
+      say('개인정보 수집·이용에 동의해 주셔야 신청이 접수됩니다.', 'bad');
+      return;
+    }
+    // 연락처 형식 (이메일 또는 숫자 9자리 이상)
+    var c = get('contact');
+    var okContact = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c) ||
+                    (c.replace(/[^0-9]/g, '').length >= 9);
+    if (!okContact) {
+      say('연락처를 이메일 또는 휴대폰 번호 형태로 입력해 주세요.', 'bad');
+      return;
+    }
+
+    // 엔드포인트 미설정 시 메일 앱으로
+    if (!SITE.sheetEndpoint) {
+      mailtoFallback(get);
+      say('메일 앱이 열립니다. 내용 확인 후 전송해 주세요.');
+      return;
+    }
+
+    lock(true);
+    say('보내는 중…');
+
+    var params = new URLSearchParams();
+    ['name','contact','industry','budget','channels','message'].forEach(function (k) {
+      params.append(k, get(k));
+    });
+    params.append('page', location.href);
+    params.append('ref', document.referrer || '');
+
+    fetch(SITE.sheetEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: params.toString()
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+      .then(function (res) {
+        if (res && res.ok === false) throw new Error(res.error || 'fail');
+        form.reset();
+        lock(false);
+        say('신청이 접수되었습니다. 영업일 기준 2일 안에 회신드리겠습니다.', 'ok');
+      })
+      .catch(function () {
+        lock(false);
+        say('전송에 실패했습니다. <a href="mailto:' + SITE.email +
+            '" style="color:#96421F;text-decoration:underline;">' + SITE.email +
+            '</a> 로 보내주시면 동일하게 접수됩니다.', 'bad');
+      });
   });
 })();
 
