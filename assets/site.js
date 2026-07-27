@@ -6,7 +6,7 @@
 
 var SITE = {
   // 문의를 받을 이메일 (전송 실패 시 안내용으로 표시됩니다)
-  email: 'enter218@gmail.com',
+  email: 'sw.park@oreummate.co.kr',
 
   // ▼▼▼ 여기에 구글 앱스크립트 배포 주소를 붙여넣으세요 ▼▼▼
   // 형태: https://script.google.com/macros/s/AKfycb.....(긴 문자열)...../exec
