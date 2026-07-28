@@ -14,26 +14,64 @@
 <meta property="og:description" content="실제 집행 데이터로 검증한 온라인광고 실무 기록.">
 <meta property="og:url" content="https://marketer-park.github.io/">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
 <link rel="alternate" type="application/rss+xml" title="온라인광고 탐험기록" href="/rss.xml">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=20260727g">
+<script src="assets/analytics.js?v=20260727g"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "마케터박프로의 온라인광고 탐험기록",
-  "description": "실제 집행 데이터로 검증한 온라인광고 실무 기록",
-  "url": "https://marketer-park.github.io/",
-  "inLanguage": "ko-KR",
-  "author": {
-    "@type": "Person",
-    "name": "마케터박프로",
-    "jobTitle": "퍼포먼스 마케터"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://marketer-park.github.io/#website",
+      "url": "https://marketer-park.github.io/",
+      "name": "마케터박프로의 온라인광고 탐험기록",
+      "description": "실제 집행 데이터로 검증한 온라인광고 실무 기록",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://marketer-park.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://marketer-park.github.io/#person",
+      "name": "마케터박프로",
+      "jobTitle": "온라인광고 퍼포먼스 마케터",
+      "url": "https://marketer-park.github.io/about.html",
+      "description": "네이버·카카오 검색광고와 메타·구글 퍼포먼스 광고를 집행하는 퍼포먼스 마케터",
+      "knowsAbout": [
+        "네이버 검색광고",
+        "카카오 키워드광고",
+        "메타 광고",
+        "구글 애즈",
+        "퍼포먼스 마케팅",
+        "광고 예산 배분",
+        "광고 대행 수수료",
+        "전환 추적"
+      ],
+      "email": "sw.park@oreummate.co.kr"
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://marketer-park.github.io/#blog",
+      "url": "https://marketer-park.github.io/",
+      "name": "마케터박프로의 온라인광고 탐험기록",
+      "description": "네이버·카카오 검색광고, 메타·구글 퍼포먼스 광고의 세팅과 최적화를 광고주 눈높이로 정리합니다.",
+      "inLanguage": "ko-KR",
+      "image": "https://marketer-park.github.io/assets/og-image.png",
+      "author": {
+        "@id": "https://marketer-park.github.io/#person"
+      }
+    }
+  ]
 }
 </script>
 </head>
 <body>
+
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">
@@ -59,56 +97,32 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-grid">
+      <div class="hero-grid" style="grid-template-columns:1fr;">
         <div>
           <p class="eyebrow">Performance Marketing Field Notes</p>
           <h1>광고비는 쓰는데,<br>어디로 갔는지<br><em>설명해주는 사람</em>이 없다면.</h1>
-          <p class="lede">네이버·카카오 검색광고부터 메타·구글 퍼포먼스까지. 실제로 집행하고 깨진 계정에서 얻은 것만 기록합니다. 이론이 아니라 리포트에서 나온 이야기입니다.</p>
+          <p class="lede">네이버·카카오 검색광고부터 메타·구글 퍼포먼스까지. 실제로 집행하고 경험한 계정에서 얻은 것만 기록합니다. 이론이 아니라 리포트에서 나온 이야기입니다.</p>
         </div>
-        <aside class="hero-side">
-          <dl>
-            <div>
-              <dt>기록 기준</dt>
-              <dd>실제 집행<br>데이터</dd>
-            </div>
-            <div>
-              <dt>다루는 채널</dt>
-              <dd>네이버 · 카카오<br>메타 · 구글</dd>
-            </div>
-            <div>
-              <dt>읽는 사람</dt>
-              <dd>광고비를 직접<br>결정하는 분</dd>
-            </div>
-          </dl>
-        </aside>
       </div>
     </div>
+    <div class="wrap"><hr></div>
   </section>
 
-  <!-- RECENT -->
+  <!-- 최신 기록 -->
   <section class="band">
     <div class="wrap">
       <div class="section-head">
         <h2>최근 기록</h2>
         <a class="more" href="insights.html">전체 보기 →</a>
       </div>
+
       <ul class="entries">
-        <li class="entry reveal">
-          <a href="posts/budget-allocation.html">
-            <span class="num">004</span>
-            <span class="body">
-              <h3>월 300만원으로 시작하는 광고 예산 배분표</h3>
-              <p>채널 비율표는 없습니다. 300만원을 역할로 나누고 검색 수요로 비중을 정하는 순서를 정리했습니다.</p>
-            </span>
-            <span class="meta"><span class="cat">광고비</span>2026.07.29</span>
-          </a>
-        </li>
         <li class="entry reveal">
           <a href="posts/agency-fee.html">
             <span class="num">003</span>
             <span class="body">
               <h3>온라인광고 대행 수수료, 실제로 어디에 얼마가 붙는가</h3>
-              <p>수수료율 10%가 전부가 아닙니다. 미디어 인센티브, 제작비, 리포팅 비용까지 구조를 갈라보면 실질 부담률이 달라집니다.</p>
+              <p>수수료율 15%가 전부가 아닙니다. 미디어 인센티브, 제작비, 리포팅 비용까지 구조를 갈라보면 실질 부담률이 달라집니다.</p>
             </span>
             <span class="meta"><span class="cat">광고비</span>2026.07.22</span>
           </a>
@@ -123,15 +137,26 @@
             <span class="meta"><span class="cat">네이버</span>2026.07.15</span>
           </a>
         </li>
+        <li class="entry reveal">
+          <a href="posts/meta-cbo-abo.html">
+            <span class="num">001</span>
+            <span class="body">
+              <h3>메타 광고 CBO와 ABO, 예산 규모가 답을 정합니다</h3>
+              <p>어느 쪽이 좋냐는 질문은 틀렸습니다. 월 예산과 소재 개수에 따라 정답이 바뀌는 이유를 정리했습니다.</p>
+            </span>
+            <span class="meta"><span class="cat">메타</span>2026.07.08</span>
+          </a>
+        </li>
       </ul>
     </div>
   </section>
 
-  <!-- PAIN -->
+  <!-- 문제 제기 -->
   <section class="band band-paper2">
     <div class="wrap">
       <p class="eyebrow">이런 상황이라면</p>
-      <h2>광고를 맡겼는데,<br>맡긴 뒤가 더 답답합니다.</h2>
+      <h2 style="font-family:var(--serif);font-size:clamp(24px,3.4vw,32px);font-weight:600;letter-spacing:-.04em;max-width:20ch;">광고를 맡겼는데,<br>맡긴 뒤가 더 답답합니다.</h2>
+
       <div class="points">
         <div>
           <span>01</span>
@@ -158,7 +183,7 @@
       <div class="cta-block reveal">
         <div>
           <h2>지금 계정, 한 번 열어봐 드립니다</h2>
-          <p>운영 중인 광고 계정의 구조·키워드·전환 설정을 살펴보고 개선 포인트를 정리해 보내드립니다. 비용은 없고, 계약을 전제로 하지도 않습니다.</p>
+          <p>운영 중인 광고 계정의 구조와 키워드를 살펴보고 개선 포인트를 정리해 보내드립니다. 비용은 없고, 계약을 전제로 하지도 않습니다.</p>
         </div>
         <a class="btn btn-light" href="diagnosis.html">무료 진단 신청 <span class="arw">→</span></a>
       </div>
@@ -182,6 +207,7 @@
     </nav>
   </div>
 </footer>
-<script src="assets/site.js"></script>
+
+<script src="assets/site.js?v=20260727g"></script>
 </body>
 </html>

@@ -1,7 +1,43 @@
+# 마케터박프로의 온라인광고 탐험기록
+# 전체 공개. 검색엔진과 AI 크롤러 모두 환영합니다.
+
 User-agent: *
 Allow: /
 
+# 네이버
 User-agent: Yeti
+Allow: /
+
+# 다음
+User-agent: Daumoa
+Allow: /
+
+# AI 검색·생성 엔진
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://marketer-park.github.io/sitemap.xml
