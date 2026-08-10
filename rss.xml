@@ -8,6 +8,13 @@
   <atom:link href="https://marketer-park.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 
   <item>
+    <title>인스타 광고 소재 A/B 테스트 설계법</title>
+    <link>https://marketer-park.github.io/posts/instagram-ab-test.html</link>
+    <guid>https://marketer-park.github.io/posts/instagram-ab-test.html</guid>
+    <pubDate>Mon, 10 Aug 2026 09:00:00 +0900</pubDate>
+    <description>소재를 몇 개 만들지보다 무엇을 비교할지가 성과를 가릅니다. 변수 선정, 테스트 세팅 방식, 승자 판단 기준을 표로 정리했습니다.</description>
+  </item>
+  <item>
     <title>지역 병원 광고, 네이버 플레이스 + 검색광고 조합</title>
     <link>https://marketer-park.github.io/posts/hospital-place-search.html</link>
     <guid>https://marketer-park.github.io/posts/hospital-place-search.html</guid>
