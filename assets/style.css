@@ -159,6 +159,52 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
   letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;
 }
 
+/* ---------- Tool grid ---------- */
+
+.tool-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
+  gap: 20px;
+}
+.tool-card {
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 28px 26px; border: 1px solid var(--rule-soft); border-radius: 4px;
+  background: var(--paper);
+  transition: border-color .25s, transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s;
+}
+.tool-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -18px rgba(23, 23, 15, 0.28);
+}
+.tool-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 4px; flex: none;
+  background: var(--paper-2); color: var(--accent);
+  transition: background .25s, color .25s;
+}
+.tool-card:hover .tool-icon { background: var(--accent); color: var(--paper); }
+.tool-icon svg { width: 26px; height: 26px; }
+.tool-cat {
+  display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted-2); margin-bottom: 6px;
+}
+.tool-card h3 {
+  font-family: var(--serif); font-size: 18px; font-weight: 500;
+  letter-spacing: -0.02em; margin: 0 0 8px; transition: color .2s;
+}
+.tool-card:hover h3 { color: var(--accent); }
+.tool-card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+.tool-card.is-soon { opacity: 0.55; cursor: default; }
+.tool-card.is-soon:hover { border-color: var(--rule-soft); transform: none; box-shadow: none; }
+.tool-card.is-soon:hover .tool-icon { background: var(--paper-2); color: var(--accent); }
+.tool-card.is-soon:hover h3 { color: var(--ink); }
+.tool-card .tool-soon-badge {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  color: var(--muted-2); border: 1px solid var(--rule); border-radius: 100px;
+  padding: 2px 9px; display: inline-block; margin-bottom: 6px;
+}
+
 /* ---------- Bands ---------- */
 
 .band { padding: 84px 0; }
