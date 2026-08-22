@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>광고비 계산기 모음 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="허용 CPA, 손익분기 ROAS, 월 예산 배분, 제외 키워드 판단까지 네 가지 광고비 계산기를 한 곳에서 씁니다. 회원가입 없이 브라우저에서 바로 계산됩니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/ad-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="광고비 계산기 모음 무료 도구">
+<meta property="og:description" content="허용 CPA·손익분기 ROAS·예산 배분·제외 키워드 판단을 바로 계산하는 무료 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/ad-calculator.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "광고비 계산기 모음",
+  "url": "https://marketer-park.github.io/tools/ad-calculator.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "허용 CPA, 손익분기 ROAS, 월 예산 배분, 제외 키워드 판단을 계산하는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 760px; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--ink); padding-bottom: 0; margin-bottom: 32px; }
+  .calc-tab {
+    border: 1px solid var(--rule); border-bottom: none; background: var(--paper-2); color: var(--muted);
+    padding: 11px 16px; font-size: 13.5px; cursor: pointer; border-radius: 4px 4px 0 0; transition: color .2s, background .2s;
+    margin-bottom: -1px;
+  }
+  .calc-tab.active { background: var(--paper); color: var(--ink); font-weight: 600; border-color: var(--ink); border-bottom: 1px solid var(--paper); }
+
+  .calc-panel { display: none; }
+  .calc-panel.show { display: block; }
+  .calc-panel h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .calc-desc { font-size: 13.5px; color: var(--muted); margin-bottom: 26px; line-height: 1.7; }
+
+  .result-box {
+    margin-top: 22px; border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--paper-2); padding: 22px 24px; display: none;
+  }
+  .result-box.show { display: block; }
+  .result-headline { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+  .result-sub { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .result-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13.5px; }
+  .result-table th, .result-table td { text-align: left; padding: 9px 10px 9px 0; border-bottom: 1px solid var(--rule-soft); }
+  .result-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  .result-table td.num { font-family: var(--mono); }
+  .verdict {
+    display: inline-block; font-size: 12.5px; font-weight: 600; padding: 4px 12px; border-radius: 100px; margin-bottom: 10px;
+  }
+  .verdict.exclude { background: #F3DEDA; color: #93392A; }
+  .verdict.keep { background: #DDEADB; color: #3D6B3D; }
+  .verdict.wait { background: var(--rule-soft); color: var(--ink-soft); }
+
+  @media (max-width: 600px) {
+    .calc-tabs { border-bottom: none; }
+    .calc-tab { border-radius: 4px; border-bottom: 1px solid var(--rule); margin-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · 계산기</p>
+      <h1>광고비 계산기 모음</h1>
+      <p class="sub">허용 CPA, 손익분기 ROAS, 월 예산 배분, 제외 키워드 판단까지 네 가지를 한 곳에서 계산합니다.</p>
+    </div>
+
+    <div class="privacy-badge">입력한 숫자가 서버로 전송되지 않습니다 (브라우저 내 계산)</div>
+
+    <div class="calc-tabs" id="calc-tabs">
+      <button type="button" class="calc-tab active" data-panel="panel-cpa">허용 CPA</button>
+      <button type="button" class="calc-tab" data-panel="panel-roas">손익분기 ROAS</button>
+      <button type="button" class="calc-tab" data-panel="panel-budget">예산 배분</button>
+      <button type="button" class="calc-tab" data-panel="panel-neg">제외 키워드 판단</button>
+    </div>
+
+    <!-- 1. 허용 CPA -->
+    <div class="calc-panel show" id="panel-cpa">
+      <h2>허용 CPA 계산기</h2>
+      <p class="calc-desc">평균 주문금액과 마진율, 목표로 하는 순이익률을 입력하면 전환 1건당 쓸 수 있는 최대 광고비(허용 CPA)를 계산합니다.</p>
+      <div class="field">
+        <label for="cpa-order">평균 주문금액 (원)</label>
+        <input type="number" id="cpa-order" placeholder="예) 45000" min="0">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cpa-margin">마진율 (%)</label>
+          <input type="number" id="cpa-margin" placeholder="예) 35" min="0" max="100">
+        </div>
+        <div class="field">
+          <label for="cpa-profit">목표 순이익률 (%)</label>
+          <input type="number" id="cpa-profit" placeholder="예) 10" min="0" max="100">
+        </div>
+      </div>
+      <button class="btn" id="btn-cpa" type="button">허용 CPA 계산 <span class="arw">→</span></button>
+      <div class="result-box" id="result-cpa">
+        <div class="result-headline" id="cpa-headline"></div>
+        <div class="result-sub" id="cpa-sub"></div>
+      </div>
+    </div>
+
+    <!-- 2. 손익분기 ROAS -->
+    <div class="calc-panel" id="panel-roas">
+      <h2>손익분기 ROAS 계산기</h2>
+      <p class="calc-desc">마진율만 알면 광고비를 전부 회수하는 손익분기 ROAS를, 목표 순이익률까지 입력하면 실제로 이익이 남는 목표 ROAS를 계산합니다.</p>
+      <div class="field-row">
+        <div class="field">
+          <label for="roas-margin">마진율 (%)</label>
+          <input type="number" id="roas-margin" placeholder="예) 30" min="1" max="100">
+        </div>
+        <div class="field">
+          <label for="roas-profit">목표 순이익률 (%, 선택)</label>
+          <input type="number" id="roas-profit" placeholder="예) 10" min="0" max="100">
+        </div>
+      </div>
+      <button class="btn" id="btn-roas" type="button">ROAS 계산 <span class="arw">→</span></button>
+      <div class="result-box" id="result-roas">
+        <div class="result-headline" id="roas-headline"></div>
+        <div class="result-sub" id="roas-sub"></div>
+      </div>
+    </div>
+
+    <!-- 3. 예산 배분 -->
+    <div class="calc-panel" id="panel-budget">
+      <h2>월 예산 배분 계산기</h2>
+      <p class="calc-desc">총 광고 예산을 역할(수요 수확·수요 창출·측정과 실험)로 나눕니다. 브랜드 검색 수요가 클수록 수확 비중을, 작을수록 창출 비중을 늘리는 방식입니다.</p>
+      <div class="field">
+        <label for="budget-total">월 총 광고 예산 (원)</label>
+        <input type="number" id="budget-total" placeholder="예) 5000000" min="0">
+      </div>
+      <div class="field">
+        <label for="budget-demand">브랜드 검색 수요 수준</label>
+        <select id="budget-demand">
+          <option value="high">높음 — 브랜드명 검색이 꾸준함</option>
+          <option value="mid" selected>보통 — 브랜드 인지도가 형성되는 중</option>
+          <option value="low">낮음 — 신규 브랜드, 검색 수요가 거의 없음</option>
+        </select>
+      </div>
+      <button class="btn" id="btn-budget" type="button">예산 배분 계산 <span class="arw">→</span></button>
+      <div class="result-box" id="result-budget">
+        <table class="result-table">
+          <thead><tr><th>역할</th><th>비중</th><th>금액</th></tr></thead>
+          <tbody id="budget-rows"></tbody>
+        </table>
+        <p class="result-sub" id="budget-sub" style="margin-top:14px;"></p>
+      </div>
+    </div>
+
+    <!-- 4. 제외 키워드 판단 -->
+    <div class="calc-panel" id="panel-neg">
+      <h2>제외 키워드 판단 계산기</h2>
+      <p class="calc-desc">목표 전환율을 기준으로 "전환 1건이 나오려면 필요한 클릭수"를 구하고, 그 1.5배를 넘겼는데 전환이 0건이면 제외를 검토할 신호로 판단합니다.</p>
+      <div class="field">
+        <label for="neg-cvr">목표 전환율 (%)</label>
+        <input type="number" id="neg-cvr" placeholder="예) 3" min="0.1" step="0.1">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="neg-clicks">현재 클릭수</label>
+          <input type="number" id="neg-clicks" placeholder="예) 55" min="0">
+        </div>
+        <div class="field">
+          <label for="neg-conv">현재 전환수</label>
+          <input type="number" id="neg-conv" placeholder="예) 0" min="0">
+        </div>
+      </div>
+      <button class="btn" id="btn-neg" type="button">판단하기 <span class="arw">→</span></button>
+      <div class="result-box" id="result-neg">
+        <div id="neg-verdict"></div>
+        <div class="result-sub" id="neg-sub"></div>
+      </div>
+    </div>
+
+    <div class="article-foot" style="margin-top:48px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">계산기로 기준을 잡는 것과 실제 계정에 적용하는 것은 다른 문제입니다. 지금 운영 중인 계정을 함께 점검해 드립니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const tabs = document.getElementById('calc-tabs');
+  tabs.addEventListener('click', function(e) {
+    const btn = e.target.closest('.calc-tab');
+    if (!btn) return;
+    document.querySelectorAll('.calc-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.calc-panel').forEach(function(p) { p.classList.remove('show'); });
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('show');
+  });
+
+  function fmtWon(n) {
+    return Math.round(n).toLocaleString('ko-KR') + '원';
+  }
+
+  // 1. 허용 CPA
+  document.getElementById('btn-cpa').addEventListener('click', function() {
+    const order = parseFloat(document.getElementById('cpa-order').value);
+    const margin = parseFloat(document.getElementById('cpa-margin').value);
+    const profit = parseFloat(document.getElementById('cpa-profit').value) || 0;
+    const box = document.getElementById('result-cpa');
+    if (!order || !margin) { alert('평균 주문금액과 마진율을 입력해주세요.'); return; }
+    if (profit >= margin) {
+      box.classList.add('show');
+      document.getElementById('cpa-headline').textContent = '허용 CPA 없음';
+      document.getElementById('cpa-sub').textContent = '목표 순이익률(' + profit + '%)이 마진율(' + margin + '%)보다 크거나 같아 광고비를 쓸 여유가 없습니다. 목표 순이익률을 낮추거나 마진율을 먼저 개선해야 합니다.';
+      return;
+    }
+    const cpa = order * (margin - profit) / 100;
+    const breakeven = order * margin / 100;
+    box.classList.add('show');
+    document.getElementById('cpa-headline').textContent = fmtWon(cpa);
+    document.getElementById('cpa-sub').textContent =
+      '전환 1건당 최대 ' + fmtWon(cpa) + '까지 광고비를 써도 목표 순이익률 ' + profit + '%를 지킬 수 있습니다. ' +
+      '(참고: 순이익을 전혀 남기지 않는 손익분기 CPA는 ' + fmtWon(breakeven) + '입니다.)';
+  });
+
+  // 2. 손익분기 ROAS
+  document.getElementById('btn-roas').addEventListener('click', function() {
+    const margin = parseFloat(document.getElementById('roas-margin').value);
+    const profit = parseFloat(document.getElementById('roas-profit').value) || 0;
+    const box = document.getElementById('result-roas');
+    if (!margin) { alert('마진율을 입력해주세요.'); return; }
+    const breakevenRoas = (100 / margin) * 100;
+    box.classList.add('show');
+    if (profit > 0) {
+      if (profit >= margin) {
+        document.getElementById('roas-headline').textContent = '도달 불가';
+        document.getElementById('roas-sub').textContent = '목표 순이익률이 마진율보다 크거나 같아 이 조건으로는 이익이 남는 ROAS가 존재하지 않습니다.';
+        return;
+      }
+      const targetRoas = (100 / (margin - profit)) * 100;
+      document.getElementById('roas-headline').textContent = 'ROAS ' + Math.round(targetRoas) + '%';
+      document.getElementById('roas-sub').textContent =
+        '순이익률 ' + profit + '%까지 남기려면 ROAS ' + Math.round(targetRoas) + '% 이상이 필요합니다. ' +
+        '(참고: 이익 없이 광고비만 회수하는 손익분기 ROAS는 ' + Math.round(breakevenRoas) + '%입니다.)';
+    } else {
+      document.getElementById('roas-headline').textContent = 'ROAS ' + Math.round(breakevenRoas) + '%';
+      document.getElementById('roas-sub').textContent = '마진율 ' + margin + '% 기준, 광고비를 전부 회수하는 손익분기 ROAS입니다. 실제 운영 목표는 이보다 높게 잡아야 이익이 남습니다.';
+    }
+  });
+
+  // 3. 예산 배분
+  const BUDGET_SPLIT = {
+    high: { harvest: 0.5, create: 0.3, measure: 0.2, label: '브랜드 검색 수요가 높아 수요 수확 비중을 크게 잡았습니다.' },
+    mid:  { harvest: 0.4, create: 0.4, measure: 0.2, label: '수요 수확과 창출 비중을 균등하게 잡았습니다.' },
+    low:  { harvest: 0.25, create: 0.5, measure: 0.25, label: '검색 수요가 아직 작아 신규 수요를 만드는 채널에 비중을 크게 잡았습니다.' }
+  };
+  document.getElementById('btn-budget').addEventListener('click', function() {
+    const total = parseFloat(document.getElementById('budget-total').value);
+    const level = document.getElementById('budget-demand').value;
+    if (!total) { alert('월 총 광고 예산을 입력해주세요.'); return; }
+    const split = BUDGET_SPLIT[level];
+    const rows = [
+      ['수요 수확 (네이버 검색·브랜드검색 등)', split.harvest],
+      ['수요 창출 (메타·구글 P-MAX·카카오 등)', split.create],
+      ['측정과 실험 (A/B 테스트, 신규 채널 테스트)', split.measure]
+    ];
+    const tbody = document.getElementById('budget-rows');
+    tbody.innerHTML = '';
+    rows.forEach(function(r) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + r[0] + '</td><td class="num">' + Math.round(r[1] * 100) + '%</td><td class="num">' + fmtWon(total * r[1]) + '</td>';
+      tbody.appendChild(tr);
+    });
+    document.getElementById('budget-sub').textContent = split.label + ' 검색 수요가 바뀌면 비중도 다시 조정하세요.';
+    document.getElementById('result-budget').classList.add('show');
+  });
+
+  // 4. 제외 키워드 판단
+  document.getElementById('btn-neg').addEventListener('click', function() {
+    const cvr = parseFloat(document.getElementById('neg-cvr').value);
+    const clicks = parseFloat(document.getElementById('neg-clicks').value);
+    const conv = parseFloat(document.getElementById('neg-conv').value);
+    const box = document.getElementById('result-neg');
+    if (!cvr || isNaN(clicks) || isNaN(conv)) { alert('목표 전환율, 현재 클릭수, 현재 전환수를 모두 입력해주세요.'); return; }
+    const neededClicks = 1 / (cvr / 100);
+    const threshold = neededClicks * 1.5;
+    box.classList.add('show');
+    let verdictHtml, sub;
+    if (conv === 0 && clicks >= threshold) {
+      verdictHtml = '<span class="verdict exclude">제외 검토 대상</span>';
+      sub = '전환 1건에 필요한 클릭수(' + Math.ceil(neededClicks) + '회)의 1.5배인 ' + Math.ceil(threshold) + '회를 넘겼는데도 전환이 0건입니다. 제외 키워드로 등록하는 것을 검토하세요.';
+    } else if (conv > 0) {
+      verdictHtml = '<span class="verdict keep">유지</span>';
+      sub = '이미 전환이 발생했습니다. 클릭당 단가와 전환율 추이를 계속 지켜보면서 유지하세요.';
+    } else {
+      verdictHtml = '<span class="verdict wait">데이터 더 필요</span>';
+      sub = '아직 판단 기준(' + Math.ceil(threshold) + '회 클릭)에 도달하지 않았습니다. 현재 ' + clicks + '회 클릭, 전환 0건 — 조금 더 데이터를 쌓은 뒤 다시 판단하세요.';
+    }
+    document.getElementById('neg-verdict').innerHTML = verdictHtml;
+    document.getElementById('neg-sub').textContent = sub;
+  });
+})();
+</script>
+</body>
+</html>

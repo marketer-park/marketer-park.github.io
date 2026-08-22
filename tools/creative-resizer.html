@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>광고 소재 사이즈 변환기 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="메타·인스타그램·구글·카카오·유튜브 채널별 광고 소재 규격에 맞춰 이미지를 자동으로 크롭·리사이즈하는 무료 도구입니다. 브라우저에서 바로 처리됩니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/creative-resizer.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="광고 소재 사이즈 변환기 무료 도구">
+<meta property="og:description" content="채널별 광고 소재 규격에 맞춰 이미지를 자동으로 크롭·리사이즈하는 무료 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/creative-resizer.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "광고 소재 사이즈 변환기",
+  "url": "https://marketer-park.github.io/tools/creative-resizer.html",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "메타·인스타그램·구글·카카오·유튜브 채널별 광고 소재 규격에 맞춰 이미지를 자동으로 크롭·리사이즈하는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 760px; }
+  .tool-drop {
+    border: 1.5px dashed var(--rule); border-radius: 4px; padding: 48px 24px; text-align: center;
+    background: var(--paper-2); cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .tool-drop.drag { border-color: var(--accent); background: #F0E9DD; }
+  .tool-drop p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+  .tool-drop strong { color: var(--ink); font-size: 16px; }
+  #tool-file-input { display: none; }
+  .tool-panel { margin-top: 32px; display: none; }
+  .tool-panel.show { display: block; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .preset-group { margin-bottom: 26px; }
+  .preset-group h3 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+  .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .preset-btn {
+    border: 1px solid var(--rule); background: var(--paper); border-radius: 4px; padding: 12px 14px;
+    font-size: 13px; color: var(--ink-soft); cursor: pointer; text-align: left; line-height: 1.5;
+    transition: border-color .2s, background .2s;
+  }
+  .preset-btn strong { display: block; color: var(--ink); font-size: 13.5px; margin-bottom: 3px; }
+  .preset-btn span { display: block; font-size: 11.5px; color: var(--muted); font-family: var(--mono); }
+  .preset-btn:hover { border-color: var(--accent); background: var(--paper-2); }
+  .preset-btn.active { border-color: var(--accent); background: #F0E9DD; }
+
+  .crop-preview-wrap { margin-top: 28px; display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .crop-preview-wrap figure { margin: 0; }
+  .crop-preview-wrap img { max-width: 280px; max-height: 320px; border: 1px solid var(--rule); border-radius: 4px; display: block; background: #eee; }
+  .crop-preview-wrap figcaption { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  .tool-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+  .tool-note { font-size: 13px; color: var(--muted); margin-top: 24px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · 이미지</p>
+      <h1>광고 소재 사이즈 변환기</h1>
+      <p class="sub">채널별 권장 규격에 맞춰 이미지를 가운데 기준으로 자동 크롭·리사이즈합니다.</p>
+    </div>
+
+    <div class="privacy-badge">업로드한 이미지가 서버로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div id="tool-drop" class="tool-drop">
+      <strong>클릭하거나 이미지를 여기로 끌어다 놓으세요</strong>
+      <p>JPG · PNG · WebP 지원 · 최대 50MB</p>
+      <input type="file" id="tool-file-input" accept="image/*">
+    </div>
+
+    <div id="tool-panel" class="tool-panel">
+
+      <div class="preset-group">
+        <h3>메타 · 인스타그램</h3>
+        <div class="preset-grid">
+          <button type="button" class="preset-btn" data-w="1080" data-h="1080">
+            <strong>피드 정사각형</strong><span>1:1 · 1080×1080</span>
+          </button>
+          <button type="button" class="preset-btn" data-w="1080" data-h="1350">
+            <strong>피드 세로형</strong><span>4:5 · 1080×1350</span>
+          </button>
+          <button type="button" class="preset-btn" data-w="1080" data-h="1920">
+            <strong>스토리 · 릴스</strong><span>9:16 · 1080×1920</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="preset-group">
+        <h3>구글 디스플레이 (반응형)</h3>
+        <div class="preset-grid">
+          <button type="button" class="preset-btn" data-w="1200" data-h="628">
+            <strong>가로형</strong><span>1.91:1 · 1200×628</span>
+          </button>
+          <button type="button" class="preset-btn" data-w="1200" data-h="1200">
+            <strong>정사각형</strong><span>1:1 · 1200×1200</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="preset-group">
+        <h3>카카오 · 유튜브</h3>
+        <div class="preset-grid">
+          <button type="button" class="preset-btn" data-w="1029" data-h="258">
+            <strong>카카오 비즈보드</strong><span>1029×258</span>
+          </button>
+          <button type="button" class="preset-btn" data-w="1280" data-h="720">
+            <strong>유튜브 썸네일</strong><span>16:9 · 1280×720</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="crop-preview-wrap" id="crop-preview-wrap" style="display:none;">
+        <figure>
+          <img id="preview-before" alt="원본 미리보기">
+          <figcaption id="caption-before">원본</figcaption>
+        </figure>
+        <figure>
+          <img id="preview-after" alt="결과 미리보기">
+          <figcaption id="caption-after">결과</figcaption>
+        </figure>
+      </div>
+
+      <div class="tool-actions">
+        <button class="btn" id="btn-download" type="button" disabled>결과 다운로드 <span class="arw">→</span></button>
+        <button class="btn btn-ghost" id="btn-reset" type="button">다른 이미지 선택</button>
+      </div>
+    </div>
+
+    <p class="tool-note">규격은 가운데를 기준으로 자동 크롭한 뒤 지정한 픽셀 크기로 맞춥니다. 인물·로고 등 중요한 요소가 가장자리에 있다면 크롭 후 미리보기를 꼭 확인하세요. 각 채널의 권장 사이즈는 공식 가이드 기준으로 정리했지만 플랫폼 정책은 자주 바뀌므로, 실제 업로드 전 광고 관리자 화면에서 규격을 한 번 더 확인하시길 권합니다.</p>
+
+    <div class="article-foot" style="margin-top:40px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">소재 규격은 맞았는데 성과가 안 나오는 계정도 있습니다. 계정 전체를 함께 점검해 드립니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const MAX_BYTES = 50 * 1024 * 1024;
+
+  const dropZone = document.getElementById('tool-drop');
+  const fileInput = document.getElementById('tool-file-input');
+  const panel = document.getElementById('tool-panel');
+  const previewBefore = document.getElementById('preview-before');
+  const previewAfter = document.getElementById('preview-after');
+  const captionBefore = document.getElementById('caption-before');
+  const captionAfter = document.getElementById('caption-after');
+  const cropWrap = document.getElementById('crop-preview-wrap');
+  const btnDownload = document.getElementById('btn-download');
+  const btnReset = document.getElementById('btn-reset');
+
+  let originalImg = null;
+  let originalFile = null;
+  let resultBlob = null;
+  let resultUrl = null;
+  let activePreset = null;
+
+  function humanSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function openFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드할 수 있습니다.');
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      alert('50MB보다 큰 파일입니다. 더 작은 이미지로 다시 시도해주세요. (현재 파일: ' + humanSize(file.size) + ')');
+      return;
+    }
+    originalFile = file;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        originalImg = img;
+        previewBefore.src = e.target.result;
+        captionBefore.textContent = '원본 · ' + img.naturalWidth + '×' + img.naturalHeight;
+        panel.classList.add('show');
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function drawCoverCrop(img, targetW, targetH) {
+    const canvas = document.createElement('canvas');
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext('2d');
+    const targetRatio = targetW / targetH;
+    const srcRatio = img.naturalWidth / img.naturalHeight;
+    let sx, sy, sw, sh;
+    if (srcRatio > targetRatio) {
+      sh = img.naturalHeight;
+      sw = sh * targetRatio;
+      sx = (img.naturalWidth - sw) / 2;
+      sy = 0;
+    } else {
+      sw = img.naturalWidth;
+      sh = sw / targetRatio;
+      sx = 0;
+      sy = (img.naturalHeight - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
+    return canvas;
+  }
+
+  function applyPreset(w, h) {
+    if (!originalImg) return;
+    activePreset = { w: w, h: h };
+    const canvas = drawCoverCrop(originalImg, w, h);
+    canvas.toBlob(function(blob) {
+      if (resultUrl) URL.revokeObjectURL(resultUrl);
+      resultBlob = blob;
+      resultUrl = URL.createObjectURL(blob);
+      previewAfter.src = resultUrl;
+      captionAfter.textContent = '결과 · ' + w + '×' + h + ' · ' + humanSize(blob.size);
+      cropWrap.style.display = 'flex';
+      btnDownload.disabled = false;
+    }, 'image/jpeg', 0.92);
+  }
+
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) openFile(e.target.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    dropZone.addEventListener(evt, function(e) {
+      e.preventDefault(); e.stopPropagation(); dropZone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    dropZone.addEventListener(evt, function(e) {
+      e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('drag');
+    });
+  });
+  dropZone.addEventListener('drop', function(e) {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) openFile(e.dataTransfer.files[0]);
+  });
+
+  document.querySelectorAll('.preset-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (!originalImg) { alert('먼저 이미지를 업로드해주세요.'); return; }
+      document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyPreset(parseInt(btn.dataset.w, 10), parseInt(btn.dataset.h, 10));
+    });
+  });
+
+  btnDownload.addEventListener('click', function() {
+    if (!resultBlob || !activePreset) return;
+    const a = document.createElement('a');
+    a.href = resultUrl;
+    a.download = 'creative-' + activePreset.w + 'x' + activePreset.h + '-' + Date.now() + '.jpg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  btnReset.addEventListener('click', function() {
+    originalImg = null; originalFile = null; resultBlob = null; activePreset = null;
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    panel.classList.remove('show');
+    cropWrap.style.display = 'none';
+    fileInput.value = '';
+    btnDownload.disabled = true;
+    document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
+  });
+})();
+</script>
+</body>
+</html>

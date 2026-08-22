@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>QR 코드 생성기 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="URL이나 텍스트를 입력하면 QR 코드를 바로 만들어주는 무료 도구입니다. UTM 빌더에서 만든 추적 URL을 그대로 이어받아 오프라인 광고물에 붙일 QR을 만들 수 있습니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/qr-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR 코드 생성기 무료 도구">
+<meta property="og:description" content="URL·텍스트로 QR 코드를 바로 만들고 PNG로 다운로드하는 무료 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/qr-generator.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QR 코드 생성기",
+  "url": "https://marketer-park.github.io/tools/qr-generator.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "URL이나 텍스트를 입력하면 QR 코드를 만들어주는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 760px; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .qr-layout { display: grid; grid-template-columns: minmax(0,1fr) 240px; gap: 40px; align-items: start; }
+  .qr-preview {
+    border: 1px solid var(--rule); border-radius: 4px; background: var(--paper-2);
+    padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .qr-preview canvas, .qr-preview img { max-width: 100%; background: #fff; border-radius: 2px; }
+  .qr-empty { color: var(--muted); font-size: 13px; text-align: center; padding: 40px 12px; }
+
+  @media (max-width: 720px) {
+    .qr-layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · QR</p>
+      <h1>QR 코드 생성기</h1>
+      <p class="sub">URL이나 텍스트를 입력하면 QR 코드를 바로 만들어드립니다. 오프라인 광고물에 붙여 온라인 캠페인과 연결할 때 유용합니다.</p>
+    </div>
+
+    <div class="privacy-badge">입력한 내용이 서버로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div class="qr-layout">
+      <div>
+        <div class="field">
+          <label for="qr-text">URL 또는 텍스트</label>
+          <textarea id="qr-text" rows="3" placeholder="https://marketer-park.github.io/diagnosis.html?utm_source=..."></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="qr-size">크기 (px)</label>
+            <select id="qr-size">
+              <option value="300">300 × 300 — 화면용</option>
+              <option value="600" selected>600 × 600 — 인쇄 소형(명함·전단지)</option>
+              <option value="1000">1000 × 1000 — 인쇄 대형(배너·포스터)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="qr-ecl">오류 복원 수준</label>
+            <select id="qr-ecl">
+              <option value="M" selected>보통 (M) — 일반적인 용도</option>
+              <option value="Q">높음 (Q) — 로고를 겹칠 계획이면</option>
+              <option value="H">최고 (H) — 인쇄물이 훼손될 수 있는 환경</option>
+              <option value="L">낮음 (L) — 데이터가 길 때</option>
+            </select>
+          </div>
+        </div>
+        <div class="tool-actions" style="margin-top:6px;">
+          <button class="btn" id="btn-generate" type="button">QR 코드 만들기 <span class="arw">→</span></button>
+          <a class="btn btn-ghost" href="utm-builder.html">UTM 빌더에서 URL 만들기 <span class="arw">→</span></a>
+        </div>
+        <p class="tool-note">QR을 인쇄물에 쓸 계획이면 크기를 600px 이상으로, 명함처럼 작게 인쇄한다면 오류 복원 수준을 "높음" 이상으로 두는 것을 권장합니다.</p>
+      </div>
+
+      <div class="qr-preview" id="qr-preview">
+        <p class="qr-empty" id="qr-empty">URL이나 텍스트를 입력하고 "QR 코드 만들기"를 누르면 여기에 생성됩니다.</p>
+        <div id="qr-canvas-container" style="display:none;"></div>
+        <button class="btn btn-ghost" id="btn-download" type="button" style="display:none;">PNG 다운로드</button>
+      </div>
+    </div>
+
+    <div class="article-foot" style="margin-top:48px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">오프라인과 온라인 캠페인을 연결했는데 전환 추적이 안 맞는 계정도 많이 봅니다. 계정 전체를 함께 점검해 드립니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js';document.head.appendChild(s);"></script>
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const qrText = document.getElementById('qr-text');
+  const qrSize = document.getElementById('qr-size');
+  const qrEcl = document.getElementById('qr-ecl');
+  const btnGenerate = document.getElementById('btn-generate');
+  const btnDownload = document.getElementById('btn-download');
+  const qrContainer = document.getElementById('qr-canvas-container');
+  const emptyMsg = document.getElementById('qr-empty');
+
+  function generate() {
+    const text = qrText.value.trim();
+    if (!text) { alert('URL이나 텍스트를 입력해주세요.'); return; }
+    if (typeof QRCode === 'undefined') { alert('QR 생성 라이브러리를 불러오지 못했습니다. 잠시 후 새로고침해서 다시 시도해주세요.'); return; }
+    const size = parseInt(qrSize.value, 10);
+    const levelMap = { L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H };
+    try {
+      qrContainer.innerHTML = '';
+      new QRCode(qrContainer, {
+        text: text,
+        width: size,
+        height: size,
+        colorDark: '#17170F',
+        colorLight: '#FFFFFF',
+        correctLevel: levelMap[qrEcl.value] || QRCode.CorrectLevel.M
+      });
+    } catch (e) {
+      alert('QR 코드를 만드는 중 문제가 발생했습니다. 입력값을 확인해주세요.');
+      return;
+    }
+    qrContainer.style.display = 'block';
+    emptyMsg.style.display = 'none';
+    btnDownload.style.display = 'inline-flex';
+  }
+
+  btnGenerate.addEventListener('click', generate);
+
+  btnDownload.addEventListener('click', function() {
+    const canvasEl = qrContainer.querySelector('canvas');
+    const imgEl = qrContainer.querySelector('img');
+    const dataUrl = canvasEl ? canvasEl.toDataURL('image/png') : (imgEl ? imgEl.src : null);
+    if (!dataUrl) return;
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'qrcode-' + Date.now() + '.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  // UTM 빌더에서 ?text= 파라미터로 넘어온 경우 자동 입력 + 자동 생성
+  const params = new URLSearchParams(window.location.search);
+  const prefill = params.get('text');
+  if (prefill) {
+    qrText.value = prefill;
+    window.addEventListener('load', function() {
+      if (typeof QRCode !== 'undefined') generate();
+    });
+  }
+})();
+</script>
+</body>
+</html>
