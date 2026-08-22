@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>PDF 병합·분할 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="여러 PDF를 하나로 합치거나, PDF에서 원하는 페이지만 추출·개별 분할하는 무료 도구입니다. 회원가입 없이 브라우저에서 바로 처리됩니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/pdf-tool.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PDF 병합·분할 무료 도구">
+<meta property="og:description" content="여러 PDF를 하나로 합치거나 원하는 페이지만 추출·분할하는 무료 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/pdf-tool.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PDF 병합·분할",
+  "url": "https://marketer-park.github.io/tools/pdf-tool.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "여러 PDF를 하나로 합치거나, PDF에서 원하는 페이지만 추출·개별 분할하는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 760px; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--ink); padding-bottom: 0; margin-bottom: 32px; }
+  .calc-tab {
+    border: 1px solid var(--rule); border-bottom: none; background: var(--paper-2); color: var(--muted);
+    padding: 11px 16px; font-size: 13.5px; cursor: pointer; border-radius: 4px 4px 0 0; transition: color .2s, background .2s;
+    margin-bottom: -1px;
+  }
+  .calc-tab.active { background: var(--paper); color: var(--ink); font-weight: 600; border-color: var(--ink); border-bottom: 1px solid var(--paper); }
+  .calc-panel { display: none; }
+  .calc-panel.show { display: block; }
+  .calc-desc { font-size: 13.5px; color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
+
+  .tool-drop {
+    border: 1.5px dashed var(--rule); border-radius: 4px; padding: 40px 24px; text-align: center;
+    background: var(--paper-2); cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .tool-drop.drag { border-color: var(--accent); background: #F0E9DD; }
+  .tool-drop p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+  .tool-drop strong { color: var(--ink); font-size: 16px; }
+
+  .file-list { margin-top: 20px; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; display: none; }
+  .file-list.show { display: block; }
+  .file-row {
+    display: flex; align-items: center; gap: 10px; padding: 11px 14px; font-size: 13.5px;
+    border-bottom: 1px solid var(--rule-soft); background: var(--paper);
+  }
+  .file-row:last-child { border-bottom: none; }
+  .file-row .fname { flex: 1; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-row .fpages { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .file-row .ficon-btn {
+    border: 1px solid var(--rule); background: var(--paper-2); border-radius: 3px; width: 26px; height: 26px;
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); font-size: 13px; line-height: 1;
+  }
+  .file-row .ficon-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .file-row .ficon-btn:disabled { opacity: .35; cursor: default; }
+
+  .tool-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+  .tool-note { font-size: 13px; color: var(--muted); margin-top: 24px; line-height: 1.7; }
+
+  .split-info { margin-top: 18px; font-size: 13.5px; color: var(--ink-soft); display: none; }
+  .split-info.show { display: block; }
+  .split-info strong { color: var(--ink); }
+  .split-actions-group { margin-top: 20px; border: 1px solid var(--rule); border-radius: 4px; padding: 18px 20px; display: none; }
+  .split-actions-group.show { display: block; }
+  .split-actions-group h4 { font-size: 13.5px; margin: 0 0 10px; font-weight: 600; }
+  .status-msg { font-size: 13px; color: var(--accent); margin-top: 10px; display: none; }
+  .status-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · PDF</p>
+      <h1>PDF 병합·분할</h1>
+      <p class="sub">제안서·계약서·리포트 PDF를 하나로 합치거나, 필요한 페이지만 뽑아냅니다.</p>
+    </div>
+
+    <div class="privacy-badge">업로드한 파일이 서버로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div class="calc-tabs" id="pdf-tabs">
+      <button type="button" class="calc-tab active" data-panel="panel-merge">병합</button>
+      <button type="button" class="calc-tab" data-panel="panel-split">분할</button>
+    </div>
+
+    <!-- 병합 -->
+    <div class="calc-panel show" id="panel-merge">
+      <p class="calc-desc">여러 개의 PDF 파일을 원하는 순서로 배치한 뒤 하나로 합칩니다.</p>
+
+      <div id="merge-drop" class="tool-drop">
+        <strong>클릭하거나 PDF 파일을 여기로 끌어다 놓으세요</strong>
+        <p>여러 개 동시 선택 가능 · 최대 각 50MB</p>
+        <input type="file" id="merge-file-input" accept="application/pdf" multiple style="display:none;">
+      </div>
+
+      <div class="file-list" id="merge-file-list"></div>
+
+      <div class="tool-actions">
+        <button class="btn" id="btn-merge" type="button" disabled>병합하기 <span class="arw">→</span></button>
+        <button class="btn btn-ghost" id="btn-merge-reset" type="button">전체 지우기</button>
+      </div>
+      <p class="status-msg" id="merge-status"></p>
+    </div>
+
+    <!-- 분할 -->
+    <div class="calc-panel" id="panel-split">
+      <p class="calc-desc">PDF 한 개를 업로드하면 원하는 페이지만 추출하거나, 전체를 개별 페이지 PDF로 나눌 수 있습니다.</p>
+
+      <div id="split-drop" class="tool-drop">
+        <strong>클릭하거나 PDF 파일을 여기로 끌어다 놓으세요</strong>
+        <p>PDF 1개 · 최대 50MB</p>
+        <input type="file" id="split-file-input" accept="application/pdf" style="display:none;">
+      </div>
+
+      <p class="split-info" id="split-info">업로드한 파일: <strong id="split-fname"></strong> · 전체 <strong id="split-total"></strong>페이지</p>
+
+      <div class="split-actions-group" id="split-range-group">
+        <h4>원하는 페이지만 추출</h4>
+        <div class="field">
+          <label for="split-range-input">추출할 페이지 (예: 1-3,5,7-9)</label>
+          <input type="text" id="split-range-input" placeholder="예) 1-3,5,7-9">
+        </div>
+        <div class="tool-actions" style="margin-top:12px;">
+          <button class="btn" id="btn-split-range" type="button">선택한 페이지 추출 <span class="arw">→</span></button>
+        </div>
+      </div>
+
+      <div class="split-actions-group show" id="split-all-group" style="display:none;">
+        <h4>전체를 개별 페이지로 분할</h4>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">각 페이지를 낱장 PDF로 만들어 ZIP 파일 하나로 내려받습니다.</p>
+        <div class="tool-actions">
+          <button class="btn btn-ghost" id="btn-split-all" type="button">개별 페이지로 분할(ZIP) <span class="arw">→</span></button>
+        </div>
+      </div>
+
+      <div class="tool-actions" style="margin-top:20px;">
+        <button class="btn btn-ghost" id="btn-split-reset" type="button" style="display:none;">다른 PDF 선택</button>
+      </div>
+      <p class="status-msg" id="split-status"></p>
+    </div>
+
+    <p class="tool-note">브라우저 성능에 따라 페이지 수가 아주 많은 PDF(수백 페이지 이상)는 처리 시간이 걸릴 수 있습니다. 암호가 걸린 PDF는 열리지 않을 수 있습니다.</p>
+
+    <div class="article-foot" style="margin-top:40px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">제안서·보고서 자료 정리에 도구를 쓰셨다면, 광고 계정 자료도 함께 정리해 드릴 수 있습니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';document.head.appendChild(s);"></script>
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const MAX_BYTES = 50 * 1024 * 1024;
+
+  // ---- 탭 전환 ----
+  const tabs = document.getElementById('pdf-tabs');
+  tabs.addEventListener('click', function(e) {
+    const btn = e.target.closest('.calc-tab');
+    if (!btn) return;
+    document.querySelectorAll('.calc-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.calc-panel').forEach(function(p) { p.classList.remove('show'); });
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('show');
+  });
+
+  function checkLib() {
+    if (typeof PDFLib === 'undefined') {
+      alert('PDF 처리 라이브러리를 불러오지 못했습니다. 잠시 후 새로고침해서 다시 시도해주세요.');
+      return false;
+    }
+    return true;
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 2000);
+  }
+
+  function showStatus(el, msg, isError) {
+    el.textContent = msg;
+    el.classList.add('show');
+    el.style.color = isError ? '#93392A' : 'var(--accent)';
+  }
+
+  // ================= 병합 =================
+  const mergeDrop = document.getElementById('merge-drop');
+  const mergeInput = document.getElementById('merge-file-input');
+  const mergeList = document.getElementById('merge-file-list');
+  const btnMerge = document.getElementById('btn-merge');
+  const btnMergeReset = document.getElementById('btn-merge-reset');
+  const mergeStatus = document.getElementById('merge-status');
+
+  let mergeFiles = []; // { file, pageCount }
+
+  mergeDrop.addEventListener('click', function() { mergeInput.click(); });
+  mergeInput.addEventListener('change', function(e) { addMergeFiles(e.target.files); });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    mergeDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); mergeDrop.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    mergeDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); mergeDrop.classList.remove('drag'); });
+  });
+  mergeDrop.addEventListener('drop', function(e) { addMergeFiles(e.dataTransfer.files); });
+
+  function addMergeFiles(fileListObj) {
+    if (!checkLib()) return;
+    const files = Array.from(fileListObj || []);
+    files.forEach(function(file) {
+      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+        alert(file.name + ' — PDF 파일만 추가할 수 있습니다.');
+        return;
+      }
+      if (file.size > MAX_BYTES) {
+        alert(file.name + ' — 50MB보다 큰 파일입니다.');
+        return;
+      }
+      const entry = { file: file, pageCount: null };
+      mergeFiles.push(entry);
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        PDFLib.PDFDocument.load(e.target.result).then(function(doc) {
+          entry.pageCount = doc.getPageCount();
+          renderMergeList();
+        }).catch(function() {
+          entry.pageCount = '?';
+          entry.error = true;
+          renderMergeList();
+        });
+      };
+      reader.readAsArrayBuffer(file);
+    });
+    renderMergeList();
+  }
+
+  function renderMergeList() {
+    mergeList.classList.toggle('show', mergeFiles.length > 0);
+    mergeList.innerHTML = mergeFiles.map(function(entry, i) {
+      return '<div class="file-row" data-idx="' + i + '">' +
+        '<span class="fname">' + (i + 1) + '. ' + entry.file.name + '</span>' +
+        '<span class="fpages">' + (entry.pageCount === null ? '읽는 중...' : entry.pageCount + 'p') + '</span>' +
+        '<button type="button" class="ficon-btn" data-act="up" ' + (i === 0 ? 'disabled' : '') + ' title="위로">↑</button>' +
+        '<button type="button" class="ficon-btn" data-act="down" ' + (i === mergeFiles.length - 1 ? 'disabled' : '') + ' title="아래로">↓</button>' +
+        '<button type="button" class="ficon-btn" data-act="remove" title="삭제">×</button>' +
+      '</div>';
+    }).join('');
+    const readyCount = mergeFiles.filter(function(f) { return f.pageCount !== null && !f.error; }).length;
+    btnMerge.disabled = mergeFiles.length < 2 || readyCount !== mergeFiles.length;
+  }
+
+  mergeList.addEventListener('click', function(e) {
+    const btn = e.target.closest('.ficon-btn');
+    if (!btn) return;
+    const row = e.target.closest('.file-row');
+    const idx = parseInt(row.dataset.idx, 10);
+    if (btn.dataset.act === 'remove') {
+      mergeFiles.splice(idx, 1);
+    } else if (btn.dataset.act === 'up' && idx > 0) {
+      const tmp = mergeFiles[idx - 1]; mergeFiles[idx - 1] = mergeFiles[idx]; mergeFiles[idx] = tmp;
+    } else if (btn.dataset.act === 'down' && idx < mergeFiles.length - 1) {
+      const tmp = mergeFiles[idx + 1]; mergeFiles[idx + 1] = mergeFiles[idx]; mergeFiles[idx] = tmp;
+    }
+    renderMergeList();
+  });
+
+  btnMergeReset.addEventListener('click', function() {
+    mergeFiles = [];
+    mergeInput.value = '';
+    mergeStatus.classList.remove('show');
+    renderMergeList();
+  });
+
+  btnMerge.addEventListener('click', function() {
+    if (!checkLib() || mergeFiles.length < 2) return;
+    btnMerge.disabled = true;
+    showStatus(mergeStatus, '병합 중...', false);
+    (async function() {
+      try {
+        const mergedPdf = await PDFLib.PDFDocument.create();
+        for (const entry of mergeFiles) {
+          const bytes = await entry.file.arrayBuffer();
+          const srcDoc = await PDFLib.PDFDocument.load(bytes);
+          const copiedPages = await mergedPdf.copyPages(srcDoc, srcDoc.getPageIndices());
+          copiedPages.forEach(function(p) { mergedPdf.addPage(p); });
+        }
+        const outBytes = await mergedPdf.save();
+        const blob = new Blob([outBytes], { type: 'application/pdf' });
+        downloadBlob(blob, 'merged-' + Date.now() + '.pdf');
+        showStatus(mergeStatus, '병합 완료 · 총 ' + mergedPdf.getPageCount() + '페이지 · 다운로드가 시작됩니다.', false);
+      } catch (err) {
+        showStatus(mergeStatus, '병합 중 문제가 발생했습니다. 손상되지 않은 PDF인지 확인해주세요.', true);
+      } finally {
+        btnMerge.disabled = mergeFiles.length < 2;
+      }
+    })();
+  });
+
+  // ================= 분할 =================
+  const splitDrop = document.getElementById('split-drop');
+  const splitInput = document.getElementById('split-file-input');
+  const splitInfo = document.getElementById('split-info');
+  const splitFname = document.getElementById('split-fname');
+  const splitTotal = document.getElementById('split-total');
+  const splitRangeGroup = document.getElementById('split-range-group');
+  const splitAllGroup = document.getElementById('split-all-group');
+  const splitRangeInput = document.getElementById('split-range-input');
+  const btnSplitRange = document.getElementById('btn-split-range');
+  const btnSplitAll = document.getElementById('btn-split-all');
+  const btnSplitReset = document.getElementById('btn-split-reset');
+  const splitStatus = document.getElementById('split-status');
+
+  let splitDoc = null;
+  let splitFile = null;
+
+  splitDrop.addEventListener('click', function() { splitInput.click(); });
+  splitInput.addEventListener('change', function(e) { if (e.target.files[0]) loadSplitFile(e.target.files[0]); });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    splitDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); splitDrop.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    splitDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); splitDrop.classList.remove('drag'); });
+  });
+  splitDrop.addEventListener('drop', function(e) { if (e.dataTransfer.files[0]) loadSplitFile(e.dataTransfer.files[0]); });
+
+  function loadSplitFile(file) {
+    if (!checkLib()) return;
+    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+      alert('PDF 파일만 업로드할 수 있습니다.');
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      alert('50MB보다 큰 파일입니다.');
+      return;
+    }
+    splitFile = file;
+    splitStatus.classList.remove('show');
+    file.arrayBuffer().then(function(bytes) {
+      return PDFLib.PDFDocument.load(bytes);
+    }).then(function(doc) {
+      splitDoc = doc;
+      splitFname.textContent = file.name;
+      splitTotal.textContent = doc.getPageCount();
+      splitInfo.classList.add('show');
+      splitRangeGroup.classList.add('show');
+      splitAllGroup.style.display = 'block';
+      btnSplitReset.style.display = 'inline-flex';
+    }).catch(function() {
+      alert('PDF를 여는 중 문제가 발생했습니다. 손상되었거나 암호가 걸린 파일일 수 있습니다.');
+    });
+  }
+
+  function parsePageRanges(input, totalPages) {
+    const parts = input.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+    if (!parts.length) return null;
+    const pages = [];
+    for (const part of parts) {
+      const m = part.match(/^(\d+)(?:-(\d+))?$/);
+      if (!m) return null;
+      const start = parseInt(m[1], 10);
+      const end = m[2] ? parseInt(m[2], 10) : start;
+      if (start < 1 || end < start || end > totalPages) return null;
+      for (let i = start; i <= end; i++) pages.push(i);
+    }
+    return pages.length ? pages : null;
+  }
+
+  btnSplitRange.addEventListener('click', function() {
+    if (!splitDoc) return;
+    const totalPages = splitDoc.getPageCount();
+    const pages = parsePageRanges(splitRangeInput.value, totalPages);
+    if (!pages) {
+      alert('페이지 범위를 확인해주세요. 예: 1-3,5,7-9 (전체 ' + totalPages + '페이지 이내)');
+      return;
+    }
+    (async function() {
+      try {
+        showStatus(splitStatus, '추출 중...', false);
+        const outDoc = await PDFLib.PDFDocument.create();
+        const indices = pages.map(function(p) { return p - 1; });
+        const copiedPages = await outDoc.copyPages(splitDoc, indices);
+        copiedPages.forEach(function(p) { outDoc.addPage(p); });
+        const outBytes = await outDoc.save();
+        const blob = new Blob([outBytes], { type: 'application/pdf' });
+        downloadBlob(blob, 'extracted-' + Date.now() + '.pdf');
+        showStatus(splitStatus, pages.length + '페이지 추출 완료 · 다운로드가 시작됩니다.', false);
+      } catch (err) {
+        showStatus(splitStatus, '추출 중 문제가 발생했습니다.', true);
+      }
+    })();
+  });
+
+  btnSplitAll.addEventListener('click', function() {
+    if (!splitDoc) return;
+    if (typeof JSZip === 'undefined') {
+      alert('압축 라이브러리를 불러오지 못했습니다. 잠시 후 새로고침해서 다시 시도해주세요.');
+      return;
+    }
+    (async function() {
+      try {
+        btnSplitAll.disabled = true;
+        const totalPages = splitDoc.getPageCount();
+        showStatus(splitStatus, '분할 중... (0/' + totalPages + ')', false);
+        const zip = new JSZip();
+        const padLen = String(totalPages).length;
+        for (let i = 0; i < totalPages; i++) {
+          const outDoc = await PDFLib.PDFDocument.create();
+          const [copiedPage] = await outDoc.copyPages(splitDoc, [i]);
+          outDoc.addPage(copiedPage);
+          const outBytes = await outDoc.save();
+          const pageNum = String(i + 1).padStart(padLen, '0');
+          zip.file('page-' + pageNum + '.pdf', outBytes);
+          showStatus(splitStatus, '분할 중... (' + (i + 1) + '/' + totalPages + ')', false);
+        }
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        downloadBlob(zipBlob, 'split-pages-' + Date.now() + '.zip');
+        showStatus(splitStatus, '전체 ' + totalPages + '페이지 분할 완료 · ZIP 다운로드가 시작됩니다.', false);
+      } catch (err) {
+        showStatus(splitStatus, '분할 중 문제가 발생했습니다.', true);
+      } finally {
+        btnSplitAll.disabled = false;
+      }
+    })();
+  });
+
+  btnSplitReset.addEventListener('click', function() {
+    splitDoc = null;
+    splitFile = null;
+    splitInput.value = '';
+    splitInfo.classList.remove('show');
+    splitRangeGroup.classList.remove('show');
+    splitAllGroup.style.display = 'none';
+    btnSplitReset.style.display = 'none';
+    splitRangeInput.value = '';
+    splitStatus.classList.remove('show');
+  });
+})();
+</script>
+</body>
+</html>
