@@ -20,10 +20,11 @@
 - [탐험기록](https://marketer-park.github.io/insights.html): 전체 글 목록
 - [소개](https://marketer-park.github.io/about.html): 저자 소개, 다루는 영역, 일하는 방식
 - [무료 광고 진단](https://marketer-park.github.io/diagnosis.html): 진단 서비스 안내와 자주 묻는 질문
+- [도구](https://marketer-park.github.io/tools/index.html): 회원가입 없이 브라우저에서 바로 쓰는 무료 도구 모음 (이미지 압축·리사이즈·포맷변환 등)
 
 ## 글
 
-- [대행사 바꾸기 전 반드시 확인할 7가지](https://marketer-park.github.io/posts/agency-switch-checklist.html): 대행사 교체 시 계정 소유권 확인 방법, 전환 추적·오디언스·소재 원본 등 이관 대상 범위, 해지 통보 기간과 위약금 조건을 포함한 인수인계 체크리스트 7가지, 메타·구글 P-MAX·카카오 모먼트·네이버 검색광고별 재학습 공백 기간 비교, 기존 대행사와 신규 대행사의 운영 기간을 겹치게 잡는 일정 예시를 다룹니다.
+- [전환 추적, 설치됐다고 데이터를 믿어도 될까요](https://marketer-park.github.io/posts/conversion-tracking-check.html): 설치 확인과 데이터 검증의 차이, 네이버 프리미엄로그분석·메타 픽셀·구글 애즈 전환 추적 채널별 흔한 오류, 실제 주문 건수와 비교하는 법과 오차율 판단 기준, 검증 체크리스트를 표로 정리했습니다.
 - [구글 P-MAX, 늘려야 할 때와 멈춰야 할 때](https://marketer-park.github.io/posts/pmax-when-to-scale.html): P-MAX 도입 전 확인할 계정 상태(전환 추적 검증·최근 30일 전환 30건·쇼핑 피드 품질), 브랜드 검색 잠식을 인사이트 리포트로 확인하는 법과 도입 전후 예시, 학습 기간 이후에도 이어지는 중단 신호 세 가지, 도입 실행 체크리스트를 표로 정리했습니다.
 - [쇼핑몰 ROAS 200%→400% 만든 3가지 구조 변화](https://marketer-park.github.io/posts/roas-structure-change.html): 마진율 기준 손익분기 ROAS 계산법, 채널(네이버 쇼핑검색·구글 P-MAX·메타 다이나믹 리타겟팅)별 역할 분리, 상품 단위(베스트셀러·롱테일·신상품) 예산 재배치, 조회·장바구니·구매완료 세 그룹으로 나눈 리타겟팅 퍼널 정비를 표로 정리했습니다.
 - [카카오 모먼트, 언제 쓰고 언제 쓰지 말아야 하나](https://marketer-park.github.io/posts/kakao-moment.html): 카카오 모먼트 비즈보드 지면의 특성, 도달력·채널 리타겟팅·카카오싱크 연동 가입에서의 강점과 세부 타겟팅·소액 예산 즉시 전환에서의 약점, 신규 도달·채널 구독자 보유·즉각 전환·타 채널 병행 등 상황별 적합도 판단표, 다른 채널과 병행할 때의 권장 순서를 정리했습니다.
