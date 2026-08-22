@@ -20,7 +20,7 @@
 - [탐험기록](https://marketer-park.github.io/insights.html): 전체 글 목록
 - [소개](https://marketer-park.github.io/about.html): 저자 소개, 다루는 영역, 일하는 방식
 - [무료 광고 진단](https://marketer-park.github.io/diagnosis.html): 진단 서비스 안내와 자주 묻는 질문
-- [도구](https://marketer-park.github.io/tools/index.html): 회원가입 없이 브라우저에서 바로 쓰는 무료 도구 모음 (이미지 압축·리사이즈·포맷변환, UTM 빌더, 광고비 계산기, 광고 소재 사이즈 변환기, QR 코드 생성기 등)
+- [도구](https://marketer-park.github.io/tools/index.html): 회원가입 없이 브라우저에서 바로 쓰는 무료 도구 모음 (이미지 압축·리사이즈·포맷변환, UTM 빌더, 광고비 계산기, 광고 소재 사이즈 변환기, QR 코드 생성기, PDF 병합·분할, 이미지↔PDF 변환, 글자수·바이트 계산기 등)
 
 ## 글
 
