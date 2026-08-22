@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>이미지 압축·리사이즈·포맷변환 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="이미지 용량을 줄이고, 크기를 조절하고, PNG·JPG·WebP 포맷을 변환하는 무료 도구입니다. 파일을 서버에 올리지 않고 브라우저 안에서만 처리합니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/image-tool.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="이미지 압축·리사이즈·포맷변환 무료 도구">
+<meta property="og:description" content="업로드한 이미지가 서버로 전송되지 않습니다. 브라우저 안에서만 처리하는 무료 이미지 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/image-tool.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260819b">
+<script src="../assets/analytics.js?v=20260819b"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 압축·리사이즈·포맷변환 도구",
+  "url": "https://marketer-park.github.io/tools/image-tool.html",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "이미지 용량 압축, 크기 조절, PNG·JPG·WebP 포맷 변환을 브라우저 안에서만 처리하는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 760px; }
+  .tool-drop {
+    border: 1.5px dashed var(--rule); border-radius: 4px; padding: 48px 24px; text-align: center;
+    background: var(--paper-2); cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .tool-drop.drag { border-color: var(--accent); background: #F0E9DD; }
+  .tool-drop p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+  .tool-drop strong { color: var(--ink); font-size: 16px; }
+  #tool-file-input { display: none; }
+  .tool-panel { margin-top: 32px; display: none; }
+  .tool-panel.show { display: block; }
+  .tool-preview { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+  .tool-preview figure { margin: 0; flex: 1; min-width: 220px; }
+  .tool-preview img { max-width: 100%; border: 1px solid var(--rule); border-radius: 4px; display: block; }
+  .tool-preview figcaption { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .tool-controls .field { margin-bottom: 18px; }
+  .tool-controls .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .range-row { display: flex; align-items: center; gap: 14px; }
+  .range-row input[type="range"] { flex: 1; }
+  .range-row output { font-family: var(--mono); font-size: 13px; color: var(--ink); min-width: 42px; text-align: right; }
+  .tool-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+  .tool-note { font-size: 13px; color: var(--muted); margin-top: 24px; line-height: 1.7; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+  .preset-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .preset-btn {
+    flex: 1; min-width: 120px; border: 1px solid var(--rule); background: var(--paper);
+    border-radius: 4px; padding: 10px 12px; font-size: 13px; color: var(--ink-soft); cursor: pointer;
+    text-align: left; line-height: 1.5; transition: border-color .2s, background .2s;
+  }
+  .preset-btn span { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .preset-btn:hover { border-color: var(--accent); background: var(--paper-2); }
+  .preset-btn.active { border-color: var(--accent); background: #F0E9DD; color: var(--ink); font-weight: 600; }
+  .preset-btn.disabled { opacity: .4; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · 이미지</p>
+      <h1>이미지 압축·리사이즈·포맷변환</h1>
+      <p class="sub">업로드한 이미지는 서버로 전송되지 않고 이 브라우저 안에서만 처리됩니다.</p>
+    </div>
+
+    <div class="privacy-badge">파일이 외부로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div id="tool-drop" class="tool-drop">
+      <strong>클릭하거나 이미지를 여기로 끌어다 놓으세요</strong>
+      <p>JPG · PNG · WebP 지원 · 최대 50MB</p>
+      <input type="file" id="tool-file-input" accept="image/*">
+    </div>
+
+    <div id="tool-panel" class="tool-panel">
+      <div class="tool-preview">
+        <figure>
+          <img id="preview-before" alt="원본 미리보기">
+          <figcaption id="caption-before">원본</figcaption>
+        </figure>
+        <figure>
+          <img id="preview-after" alt="결과 미리보기">
+          <figcaption id="caption-after">결과 (설정을 조절하면 자동 갱신됩니다)</figcaption>
+        </figure>
+      </div>
+
+      <div class="tool-controls">
+        <div class="field-row">
+          <div class="field">
+            <label for="opt-format">출력 포맷</label>
+            <select id="opt-format">
+              <option value="image/jpeg">JPG</option>
+              <option value="image/webp">WebP</option>
+              <option value="image/png">PNG</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="opt-width">가로 크기 (px, 비워두면 원본 유지)</label>
+            <input type="number" id="opt-width" placeholder="예) 1200" min="1">
+          </div>
+        </div>
+        <div class="field" id="target-field">
+          <label>목표 용량 (자동으로 품질을 맞춰드립니다)</label>
+          <div class="preset-row" id="preset-row">
+            <button type="button" class="preset-btn" data-kb="150">광고 배너용<br><span>150KB 이하</span></button>
+            <button type="button" class="preset-btn" data-kb="300">웹페이지용<br><span>300KB 이하</span></button>
+            <button type="button" class="preset-btn" data-kb="1024">이메일 첨부용<br><span>1MB 이하</span></button>
+            <button type="button" class="preset-btn" data-kb="2048">SNS 업로드용<br><span>2MB 이하</span></button>
+          </div>
+          <div class="range-row" style="margin-top:12px;">
+            <input type="number" id="opt-target-kb" placeholder="직접 입력 (KB)" min="1" style="max-width:160px;">
+            <button type="button" class="btn btn-ghost" id="btn-apply-target" style="padding:7px 15px;font-size:13px;">적용</button>
+            <button type="button" class="btn btn-ghost" id="btn-manual-mode" style="padding:7px 15px;font-size:13px;">품질 직접 조절로 전환</button>
+          </div>
+          <p class="hint" id="target-hint">프리셋을 누르거나 원하는 용량(KB)을 입력하면 그 용량 이하가 되도록 품질을 자동으로 낮춰 압축합니다. PNG는 무손실 방식이라 목표 용량 지정을 지원하지 않습니다.</p>
+        </div>
+        <div class="field" id="quality-field" style="display:none;">
+          <label for="opt-quality">압축 품질 (직접 조절)</label>
+          <div class="range-row">
+            <input type="range" id="opt-quality" min="10" max="100" value="80">
+            <output id="opt-quality-val">80%</output>
+          </div>
+          <p class="hint">낮을수록 용량은 작아지지만 화질이 떨어집니다. <button type="button" id="btn-target-mode" style="border:none;background:none;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0;font:inherit;">목표 용량 지정으로 전환</button></p>
+        </div>
+      </div>
+
+      <div class="tool-actions">
+        <button class="btn" id="btn-download" type="button">결과 다운로드 <span class="arw">→</span></button>
+        <button class="btn btn-ghost" id="btn-reset" type="button">다른 이미지 선택</button>
+      </div>
+
+      <p class="tool-note" id="size-compare"></p>
+    </div>
+
+    <p class="tool-note">이 도구는 브라우저의 Canvas 기능만으로 동작하며 별도 서버로 파일을 전송하지 않습니다. 인터넷 연결이 끊겨도 페이지를 한 번 불러온 뒤라면 계속 사용할 수 있습니다. HEIC(아이폰 사진) 파일은 브라우저 호환성 문제로 지원하지 않습니다 — 아이폰 설정에서 "호환성 우선(JPG)"으로 촬영본을 저장하시면 바로 사용하실 수 있습니다.</p>
+
+    <div class="article-foot" style="margin-top:56px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">광고 소재·랜딩페이지 이미지 용량 때문에 로딩 속도가 느려진 계정, 자주 봅니다. 계정 전체를 함께 점검해 드립니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/site.js?v=20260819b"></script>
+<script>
+(function() {
+  const MAX_BYTES = 50 * 1024 * 1024; // 50MB — 실제로 체크되는 값입니다.
+
+  const dropZone = document.getElementById('tool-drop');
+  const fileInput = document.getElementById('tool-file-input');
+  const panel = document.getElementById('tool-panel');
+  const previewBefore = document.getElementById('preview-before');
+  const previewAfter = document.getElementById('preview-after');
+  const captionBefore = document.getElementById('caption-before');
+  const captionAfter = document.getElementById('caption-after');
+  const optFormat = document.getElementById('opt-format');
+  const optWidth = document.getElementById('opt-width');
+  const optQuality = document.getElementById('opt-quality');
+  const optQualityVal = document.getElementById('opt-quality-val');
+  const qualityField = document.getElementById('quality-field');
+  const targetField = document.getElementById('target-field');
+  const targetHint = document.getElementById('target-hint');
+  const presetRow = document.getElementById('preset-row');
+  const optTargetKb = document.getElementById('opt-target-kb');
+  const btnApplyTarget = document.getElementById('btn-apply-target');
+  const btnManualMode = document.getElementById('btn-manual-mode');
+  const btnTargetMode = document.getElementById('btn-target-mode');
+  const btnDownload = document.getElementById('btn-download');
+  const btnReset = document.getElementById('btn-reset');
+  const sizeCompare = document.getElementById('size-compare');
+
+  let originalImg = null;
+  let originalFile = null;
+  let resultBlob = null;
+  let resultUrl = null;
+  let mode = 'target'; // 'quality' | 'target' — 기본은 목표 용량 프리셋 화면
+  let targetBytes = null;
+  let renderToken = 0;
+
+  function humanSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function openFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드할 수 있습니다.');
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      alert('50MB보다 큰 파일입니다. 더 작은 이미지로 다시 시도해주세요. (현재 파일: ' + humanSize(file.size) + ')');
+      return;
+    }
+    originalFile = file;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        originalImg = img;
+        previewBefore.src = e.target.result;
+        captionBefore.textContent = '원본 · ' + img.naturalWidth + '×' + img.naturalHeight + ' · ' + humanSize(file.size);
+        optWidth.placeholder = '예) ' + img.naturalWidth;
+        panel.classList.add('show');
+        render();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function canvasToBlobAsync(canvas, format, quality) {
+    return new Promise(function(resolve) {
+      canvas.toBlob(resolve, format, quality);
+    });
+  }
+
+  function buildCanvas() {
+    let targetW = parseInt(optWidth.value, 10);
+    if (!targetW || targetW <= 0) targetW = originalImg.naturalWidth;
+    const scale = targetW / originalImg.naturalWidth;
+    const targetH = Math.round(originalImg.naturalHeight * scale);
+    const canvas = document.createElement('canvas');
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(originalImg, 0, 0, targetW, targetH);
+    return canvas;
+  }
+
+  async function render() {
+    if (!originalImg) return;
+    const myToken = ++renderToken;
+    const format = optFormat.value;
+    const canvas = buildCanvas();
+    let blob, qualityUsed;
+
+    if (mode === 'target' && format !== 'image/png' && targetBytes) {
+      sizeCompare.textContent = '목표 용량에 맞춰 압축 중...';
+      let lo = 0.05, hi = 1.0;
+      blob = await canvasToBlobAsync(canvas, format, hi);
+      qualityUsed = hi;
+      if (blob.size > targetBytes) {
+        for (let i = 0; i < 8; i++) {
+          const mid = (lo + hi) / 2;
+          const testBlob = await canvasToBlobAsync(canvas, format, mid);
+          if (testBlob.size > targetBytes) {
+            hi = mid;
+          } else {
+            lo = mid;
+            blob = testBlob;
+            qualityUsed = mid;
+          }
+        }
+      }
+      if (myToken !== renderToken) return;
+      if (blob.size > targetBytes) {
+        targetHint.textContent = '이 크기(가로 ' + canvas.width + 'px)에서는 목표 용량까지 줄일 수 없습니다. 가로 크기를 더 줄이면 목표에 도달할 수 있습니다. 지금은 가장 낮은 품질(' + Math.round(qualityUsed * 100) + '%)로 압축된 결과입니다.';
+      } else {
+        targetHint.textContent = '목표 용량에 맞춰 품질 ' + Math.round(qualityUsed * 100) + '%로 자동 조정되었습니다.';
+      }
+    } else {
+      if (mode === 'target' && format === 'image/png') {
+        targetHint.textContent = 'PNG는 무손실 방식이라 목표 용량 지정을 지원하지 않습니다. 가로 크기를 줄이거나 JPG/WebP로 바꿔주세요.';
+      }
+      const quality = parseInt(optQuality.value, 10) / 100;
+      blob = await canvasToBlobAsync(canvas, format, quality);
+      qualityUsed = quality;
+    }
+
+    if (myToken !== renderToken || !blob) return;
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    resultBlob = blob;
+    resultUrl = URL.createObjectURL(blob);
+    previewAfter.src = resultUrl;
+    captionAfter.textContent = '결과 · ' + canvas.width + '×' + canvas.height + ' · ' + humanSize(blob.size);
+
+    const diff = originalFile.size - blob.size;
+    const pct = originalFile.size > 0 ? Math.round((diff / originalFile.size) * 100) : 0;
+    if (diff > 0) {
+      sizeCompare.textContent = '원본 대비 용량 ' + pct + '% 감소 (' + humanSize(originalFile.size) + ' → ' + humanSize(blob.size) + ')';
+    } else {
+      sizeCompare.textContent = '원본: ' + humanSize(originalFile.size) + ' → 결과: ' + humanSize(blob.size);
+    }
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    if (mode === 'quality') {
+      qualityField.style.display = '';
+      targetField.style.display = 'none';
+    } else {
+      qualityField.style.display = 'none';
+      targetField.style.display = '';
+    }
+    render();
+  }
+
+  function updatePngState() {
+    const isPng = optFormat.value === 'image/png';
+    presetRow.classList.toggle('disabled', isPng);
+    if (isPng && mode === 'target') {
+      // PNG는 목표 용량 모드를 지원하지 않으므로 자동으로 품질 모드로 전환
+      setMode('quality');
+      return;
+    }
+  }
+
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) openFile(e.target.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    dropZone.addEventListener(evt, function(e) {
+      e.preventDefault(); e.stopPropagation(); dropZone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    dropZone.addEventListener(evt, function(e) {
+      e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('drag');
+    });
+  });
+  dropZone.addEventListener('drop', function(e) {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) openFile(e.dataTransfer.files[0]);
+  });
+
+  optFormat.addEventListener('change', function() { updatePngState(); render(); });
+  optWidth.addEventListener('input', debounce(render, 400));
+  optQuality.addEventListener('input', function() {
+    optQualityVal.textContent = optQuality.value + '%';
+    debounce(render, 150)();
+  });
+
+  presetRow.addEventListener('click', function(e) {
+    const btn = e.target.closest('.preset-btn');
+    if (!btn || optFormat.value === 'image/png') return;
+    Array.from(presetRow.children).forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    const kb = parseInt(btn.dataset.kb, 10);
+    optTargetKb.value = kb;
+    targetBytes = kb * 1024;
+    mode = 'target';
+    render();
+  });
+
+  btnApplyTarget.addEventListener('click', function() {
+    const kb = parseInt(optTargetKb.value, 10);
+    if (!kb || kb <= 0) { alert('목표 용량(KB)을 숫자로 입력해주세요.'); return; }
+    if (optFormat.value === 'image/png') { alert('PNG는 목표 용량 지정을 지원하지 않습니다. JPG나 WebP를 먼저 선택해주세요.'); return; }
+    Array.from(presetRow.children).forEach(function(b) { b.classList.remove('active'); });
+    targetBytes = kb * 1024;
+    mode = 'target';
+    render();
+  });
+
+  btnManualMode.addEventListener('click', function() { setMode('quality'); });
+  btnTargetMode.addEventListener('click', function() {
+    if (optFormat.value === 'image/png') { alert('PNG는 목표 용량 지정을 지원하지 않습니다. JPG나 WebP를 먼저 선택해주세요.'); return; }
+    setMode('target');
+  });
+
+  function debounce(fn, wait) {
+    let t;
+    return function() {
+      clearTimeout(t);
+      t = setTimeout(fn, wait);
+    };
+  }
+
+  btnDownload.addEventListener('click', function() {
+    if (!resultBlob) return;
+    const ext = optFormat.value === 'image/png' ? 'png' : (optFormat.value === 'image/webp' ? 'webp' : 'jpg');
+    const a = document.createElement('a');
+    a.href = resultUrl;
+    a.download = 'image-' + Date.now() + '.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  btnReset.addEventListener('click', function() {
+    originalImg = null; originalFile = null; resultBlob = null;
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    panel.classList.remove('show');
+    fileInput.value = '';
+    Array.from(presetRow.children).forEach(function(b) { b.classList.remove('active'); });
+    optTargetKb.value = '';
+    targetBytes = null;
+    setMode('quality');
+  });
+})();
+</script>
+</body>
+</html>
