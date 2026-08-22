@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>커스텀 QR 코드(로고·색상) 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="브랜드 컬러와 로고를 넣은 QR 코드를 무료로 만드는 도구입니다. 색상과 중앙 로고를 지정해 PNG로 바로 다운로드합니다. 회원가입 없이 브라우저에서 처리됩니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/custom-qr.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="커스텀 QR 코드(로고·색상) 무료 도구">
+<meta property="og:description" content="브랜드 컬러와 로고를 넣은 QR 코드를 무료로 만드는 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/custom-qr.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "커스텀 QR 코드(로고·색상)",
+  "url": "https://marketer-park.github.io/tools/custom-qr.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (웹브라우저)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "브랜드 컬러와 로고를 넣은 QR 코드를 무료로 만드는 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 780px; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .qr-layout { display: grid; grid-template-columns: minmax(0,1fr) 260px; gap: 40px; align-items: start; }
+  .qr-preview {
+    border: 1px solid var(--rule); border-radius: 4px; background: var(--paper-2);
+    padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .qr-preview canvas, .qr-preview img { max-width: 100%; background: #fff; border-radius: 2px; }
+  .qr-empty { color: var(--muted); font-size: 13px; text-align: center; padding: 40px 12px; }
+
+  .color-row { display: flex; gap: 22px; }
+  .color-field { display: flex; flex-direction: column; gap: 6px; }
+  .color-field label { font-size: 12px; color: var(--muted); }
+  .color-field input[type="color"] {
+    width: 52px; height: 36px; border: 1px solid var(--rule); border-radius: 4px; padding: 2px; cursor: pointer; background: var(--paper);
+  }
+  .logo-drop {
+    border: 1.5px dashed var(--rule); border-radius: 4px; padding: 22px; text-align: center;
+    background: var(--paper-2); cursor: pointer; transition: border-color .2s, background .2s; font-size: 13px; color: var(--muted);
+  }
+  .logo-drop.drag { border-color: var(--accent); background: #F0E9DD; }
+  .logo-drop.has-logo { color: var(--ink-soft); }
+  .logo-remove { font-size: 12px; color: var(--accent); background: none; border: none; cursor: pointer; text-decoration: underline; margin-top: 8px; }
+
+  @media (max-width: 720px) {
+    .qr-layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · QR</p>
+      <h1>커스텀 QR 코드(로고·색상)</h1>
+      <p class="sub">브랜드 컬러를 입히고 가운데에 로고를 넣은 QR 코드를 만듭니다.</p>
+    </div>
+
+    <div class="privacy-badge">입력한 내용이 서버로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div class="qr-layout">
+      <div>
+        <div class="field">
+          <label for="qr-text">URL 또는 텍스트</label>
+          <textarea id="qr-text" rows="3" placeholder="https://marketer-park.github.io/diagnosis.html?utm_source=..."></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="qr-size">크기 (px)</label>
+            <select id="qr-size">
+              <option value="300">300 × 300 — 화면용</option>
+              <option value="600" selected>600 × 600 — 인쇄 소형(명함·전단지)</option>
+              <option value="1000">1000 × 1000 — 인쇄 대형(배너·포스터)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="qr-ecl">오류 복원 수준</label>
+            <select id="qr-ecl">
+              <option value="M">보통 (M)</option>
+              <option value="Q">높음 (Q)</option>
+              <option value="H" selected>최고 (H) — 로고를 넣을 때 권장</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row" style="margin-top:6px;">
+          <div class="color-row">
+            <div class="color-field">
+              <label for="qr-color-dark">전경색</label>
+              <input type="color" id="qr-color-dark" value="#17170F">
+            </div>
+            <div class="color-field">
+              <label for="qr-color-light">배경색</label>
+              <input type="color" id="qr-color-light" value="#FFFFFF">
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:20px;">
+          <label>가운데 로고 (선택)</label>
+          <div class="logo-drop" id="logo-drop">
+            <span id="logo-drop-text">클릭해서 로고 이미지 추가 (PNG 권장, 정사각형에 가까울수록 좋음)</span>
+            <input type="file" id="logo-input" accept="image/*" style="display:none;">
+            <div><button type="button" class="logo-remove" id="btn-logo-remove" style="display:none;">로고 제거</button></div>
+          </div>
+        </div>
+
+        <div class="tool-actions" style="margin-top:20px;">
+          <button class="btn" id="btn-generate" type="button">QR 코드 만들기 <span class="arw">→</span></button>
+          <a class="btn btn-ghost" href="utm-builder.html">UTM 빌더에서 URL 만들기 <span class="arw">→</span></a>
+        </div>
+        <p class="tool-note">로고를 넣으면 QR 코드의 일부가 가려지므로 오류 복원 수준을 "최고(H)"로 두는 것을 권장합니다. 로고 크기는 자동으로 전체 면적의 약 18%로 제한되며, 인쇄 전 스캔 테스트를 꼭 해보세요.</p>
+      </div>
+
+      <div class="qr-preview" id="qr-preview">
+        <p class="qr-empty" id="qr-empty">URL이나 텍스트를 입력하고 "QR 코드 만들기"를 누르면 여기에 생성됩니다.</p>
+        <div id="qr-canvas-container" style="display:none;"></div>
+        <button class="btn btn-ghost" id="btn-download" type="button" style="display:none;">PNG 다운로드</button>
+      </div>
+    </div>
+
+    <div class="article-foot" style="margin-top:48px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">브랜드 소재는 갖춰졌는데 정작 광고 성과가 안 나오는 계정도 많이 봅니다. 계정 전체를 함께 점검해 드립니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js';document.head.appendChild(s);"></script>
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const qrText = document.getElementById('qr-text');
+  const qrSize = document.getElementById('qr-size');
+  const qrEcl = document.getElementById('qr-ecl');
+  const colorDark = document.getElementById('qr-color-dark');
+  const colorLight = document.getElementById('qr-color-light');
+  const btnGenerate = document.getElementById('btn-generate');
+  const btnDownload = document.getElementById('btn-download');
+  const qrContainer = document.getElementById('qr-canvas-container');
+  const emptyMsg = document.getElementById('qr-empty');
+
+  const logoDrop = document.getElementById('logo-drop');
+  const logoInput = document.getElementById('logo-input');
+  const logoDropText = document.getElementById('logo-drop-text');
+  const btnLogoRemove = document.getElementById('btn-logo-remove');
+
+  let logoImg = null; // HTMLImageElement or null
+
+  logoDrop.addEventListener('click', function(e) {
+    if (e.target === btnLogoRemove) return;
+    logoInput.click();
+  });
+  logoInput.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) loadLogo(e.target.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    logoDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); logoDrop.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    logoDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); logoDrop.classList.remove('drag'); });
+  });
+  logoDrop.addEventListener('drop', function(e) {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) loadLogo(e.dataTransfer.files[0]);
+  });
+
+  function loadLogo(file) {
+    if (!file.type.startsWith('image/')) { alert('이미지 파일만 로고로 추가할 수 있습니다.'); return; }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        logoImg = img;
+        logoDropText.textContent = '로고 등록됨: ' + file.name;
+        logoDrop.classList.add('has-logo');
+        btnLogoRemove.style.display = 'inline-block';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  btnLogoRemove.addEventListener('click', function(e) {
+    e.stopPropagation();
+    logoImg = null;
+    logoInput.value = '';
+    logoDropText.textContent = '클릭해서 로고 이미지 추가 (PNG 권장, 정사각형에 가까울수록 좋음)';
+    logoDrop.classList.remove('has-logo');
+    btnLogoRemove.style.display = 'none';
+  });
+
+  function drawLogoOnCanvas(canvas) {
+    if (!logoImg) return;
+    const ctx = canvas.getContext('2d');
+    const size = canvas.width;
+    const logoSize = Math.round(size * 0.18);
+    const pad = Math.round(logoSize * 0.16);
+    const x = (size - logoSize) / 2;
+    const y = (size - logoSize) / 2;
+    // 로고 뒤에 흰 배경 패드를 깔아 가독성 확보
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(x - pad, y - pad, logoSize + pad * 2, logoSize + pad * 2);
+    ctx.drawImage(logoImg, x, y, logoSize, logoSize);
+  }
+
+  function generate() {
+    const text = qrText.value.trim();
+    if (!text) { alert('URL이나 텍스트를 입력해주세요.'); return; }
+    if (typeof QRCode === 'undefined') { alert('QR 생성 라이브러리를 불러오지 못했습니다. 잠시 후 새로고침해서 다시 시도해주세요.'); return; }
+    const size = parseInt(qrSize.value, 10);
+    const levelMap = { L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H };
+    try {
+      qrContainer.innerHTML = '';
+      new QRCode(qrContainer, {
+        text: text,
+        width: size,
+        height: size,
+        colorDark: colorDark.value,
+        colorLight: colorLight.value,
+        correctLevel: levelMap[qrEcl.value] || QRCode.CorrectLevel.H
+      });
+      // qrcodejs는 렌더링을 동기적으로 즉시 끝내므로 바로 캔버스에 로고를 얹을 수 있음
+      const canvasEl = qrContainer.querySelector('canvas');
+      if (canvasEl) drawLogoOnCanvas(canvasEl);
+    } catch (e) {
+      alert('QR 코드를 만드는 중 문제가 발생했습니다. 입력값을 확인해주세요.');
+      return;
+    }
+    qrContainer.style.display = 'block';
+    emptyMsg.style.display = 'none';
+    btnDownload.style.display = 'inline-flex';
+  }
+
+  btnGenerate.addEventListener('click', generate);
+
+  btnDownload.addEventListener('click', function() {
+    const canvasEl = qrContainer.querySelector('canvas');
+    const imgEl = qrContainer.querySelector('img');
+    const dataUrl = canvasEl ? canvasEl.toDataURL('image/png') : (imgEl ? imgEl.src : null);
+    if (!dataUrl) return;
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'custom-qrcode-' + Date.now() + '.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const prefill = params.get('text');
+  if (prefill) {
+    qrText.value = prefill;
+    window.addEventListener('load', function() {
+      if (typeof QRCode !== 'undefined') generate();
+    });
+  }
+})();
+</script>
+</body>
+</html>

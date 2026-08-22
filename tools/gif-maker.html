@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="wKZLsBzOv_wG5bAqJYILQcQyK8e6qb3F4ZvywxCWNn0" />
+<meta name="naver-site-verification" content="a82a43fe7db7611a74327de8f505acdad87bdfa6" />
+<title>GIF 생성기 무료 도구 | 온라인광고 탐험기록</title>
+<meta name="description" content="여러 이미지를 순서대로 이어 붙여 움직이는 GIF를 만드는 무료 도구입니다. 배너·소재 시안 비교, 카카오톡 공유용 움짤 제작에 활용할 수 있습니다. 회원가입 없이 브라우저에서 처리됩니다.">
+<link rel="canonical" href="https://marketer-park.github.io/tools/gif-maker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GIF 생성기 무료 도구">
+<meta property="og:description" content="여러 이미지를 이어 붙여 움직이는 GIF를 만드는 무료 도구입니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://marketer-park.github.io/assets/og-image.png">
+<meta property="og:url" content="https://marketer-park.github.io/tools/gif-maker.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marketer-park.github.io/assets/og-image.png">
+<link rel="stylesheet" href="../assets/style.css?v=20260822">
+<script src="../assets/analytics.js?v=20260822"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GIF 생성기",
+  "url": "https://marketer-park.github.io/tools/gif-maker.html",
+  "applicationCategory": "MultimediaApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "description": "여러 이미지를 순서대로 이어 붙여 움직이는 GIF를 만드는 무료 도구입니다.",
+  "inLanguage": "ko-KR"
+}
+</script>
+<style>
+  .tool-wrap { max-width: 780px; }
+  .privacy-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  }
+  .privacy-badge::before { content: '●'; color: #4C7A4C; font-size: 8px; }
+
+  .tool-drop {
+    border: 1.5px dashed var(--rule); border-radius: 4px; padding: 40px 24px; text-align: center;
+    background: var(--paper-2); cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .tool-drop.drag { border-color: var(--accent); background: #F0E9DD; }
+  .tool-drop p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+  .tool-drop strong { color: var(--ink); font-size: 16px; }
+
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 20px; }
+  .img-grid-item { position: relative; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; background: var(--paper); }
+  .img-grid-item img { width: 100%; height: 100px; object-fit: cover; display: block; }
+  .img-grid-item .idx-badge { position: absolute; top: 4px; left: 4px; background: rgba(23,23,15,.75); color: #fff; font-size: 11px; font-family: var(--mono); padding: 1px 6px; border-radius: 3px; }
+  .img-grid-item .rm-btn {
+    position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 3px; border: none;
+    background: rgba(23,23,15,.75); color: #fff; cursor: pointer; font-size: 13px; line-height: 1;
+  }
+  .img-grid-item .rm-btn:hover { background: var(--accent); }
+  .img-grid-item .move-row { display: flex; }
+  .img-grid-item .move-row button {
+    flex: 1; border: none; background: var(--paper-2); color: var(--ink-soft); font-size: 11px; padding: 4px 0; cursor: pointer; border-top: 1px solid var(--rule);
+  }
+  .img-grid-item .move-row button:hover { color: var(--accent); }
+  .img-grid-item .move-row button:disabled { opacity: .3; cursor: default; }
+
+  .tool-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+  .tool-note { font-size: 13px; color: var(--muted); margin-top: 24px; line-height: 1.7; }
+  .status-msg { font-size: 13px; color: var(--accent); margin-top: 10px; display: none; }
+  .status-msg.show { display: block; }
+
+  .gif-preview-wrap { margin-top: 24px; display: none; }
+  .gif-preview-wrap.show { display: block; }
+  .gif-preview-wrap img { max-width: 320px; border: 1px solid var(--rule); border-radius: 4px; display: block; background: var(--paper-2); }
+
+  .progress-bar { margin-top: 12px; height: 6px; background: var(--rule-soft); border-radius: 100px; overflow: hidden; display: none; }
+  .progress-bar.show { display: block; }
+  .progress-bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width .15s; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <strong>온라인광고 탐험기록</strong>
+      <span>Marketer Park Pro</span>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav">
+      <a href="../index.html">홈</a>
+      <a href="../about.html">소개</a>
+      <a href="../insights.html">탐험기록</a>
+      <a href="index.html">도구</a>
+      <a class="cta" href="../diagnosis.html">무료 광고 진단</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="wrap tool-wrap">
+    <div class="article-head">
+      <p class="kicker">도구 · 이미지</p>
+      <h1>GIF 생성기</h1>
+      <p class="sub">이미지 여러 장을 순서대로 이어 붙여 움직이는 GIF를 만듭니다. 소재 시안 비교나 공유용 움짤에 씁니다.</p>
+    </div>
+
+    <div class="privacy-badge">업로드한 이미지가 서버로 전송되지 않습니다 (브라우저 내 처리)</div>
+
+    <div id="gif-drop" class="tool-drop">
+      <strong>클릭하거나 이미지를 여기로 끌어다 놓으세요</strong>
+      <p>여러 장 동시 선택 가능 · 장당 최대 20MB · 최대 30장</p>
+      <input type="file" id="gif-file-input" accept="image/*" multiple style="display:none;">
+    </div>
+
+    <div class="img-grid" id="gif-grid"></div>
+
+    <div class="field-row" style="margin-top:22px;">
+      <div class="field">
+        <label for="gif-delay">프레임 간격 (ms)</label>
+        <input type="number" id="gif-delay" value="500" min="20" max="5000" step="10">
+      </div>
+      <div class="field">
+        <label for="gif-width">출력 너비 (px)</label>
+        <select id="gif-width">
+          <option value="0">원본 비율 유지(첫 이미지 기준)</option>
+          <option value="480" selected>480px</option>
+          <option value="320">320px</option>
+          <option value="720">720px</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="gif-loop">반복</label>
+        <select id="gif-loop">
+          <option value="0" selected>무한 반복</option>
+          <option value="1">1회만 재생</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="tool-actions">
+      <button class="btn" id="btn-gif-create" type="button" disabled>GIF 만들기 <span class="arw">→</span></button>
+      <button class="btn btn-ghost" id="btn-gif-reset" type="button">전체 지우기</button>
+    </div>
+    <div class="progress-bar" id="gif-progress"><div class="progress-bar-fill" id="gif-progress-fill"></div></div>
+    <p class="status-msg" id="gif-status"></p>
+
+    <div class="gif-preview-wrap" id="gif-preview-wrap">
+      <img id="gif-preview-img" alt="생성된 GIF 미리보기">
+      <div class="tool-actions">
+        <button class="btn btn-ghost" id="btn-gif-download" type="button">GIF 다운로드</button>
+      </div>
+    </div>
+
+    <p class="tool-note">이미지 장수와 크기, 출력 너비에 따라 처리 시간이 달라집니다(수십 장이면 1분 이상 걸릴 수 있습니다). 이미지마다 비율이 다르면 첫 이미지 비율에 맞춰 가운데 정렬로 여백이 생길 수 있습니다.</p>
+
+    <div class="article-foot" style="margin-top:40px;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:22px;">소재 시안을 여러 개 만드셨다면, 어떤 조합이 성과가 좋을지도 함께 점검해 드릴 수 있습니다.</p>
+      <a class="btn btn-ghost" href="../diagnosis.html">무료 광고 진단 신청 <span class="arw">→</span></a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="fbrand">마케터박프로의 온라인광고 탐험기록</div>
+      <div>퍼포먼스 마케터의 실무 기록</div>
+      <div class="copy">© <span data-year></span> 마케터박프로. 본 사이트의 내용은 개인의 견해이며 특정 기업을 대변하지 않습니다.</div>
+    </div>
+    <nav>
+      <a href="../insights.html">탐험기록</a>
+      <a href="../about.html">소개</a>
+      <a href="../diagnosis.html">무료 진단</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js';document.head.appendChild(s);"></script>
+<script src="../assets/site.js?v=20260822"></script>
+<script>
+(function() {
+  const MAX_BYTES = 20 * 1024 * 1024;
+  const MAX_IMAGES = 30;
+  const GIF_WORKER_SCRIPT = 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js';
+
+  const gifDrop = document.getElementById('gif-drop');
+  const gifInput = document.getElementById('gif-file-input');
+  const gifGrid = document.getElementById('gif-grid');
+  const delayInput = document.getElementById('gif-delay');
+  const widthSelect = document.getElementById('gif-width');
+  const loopSelect = document.getElementById('gif-loop');
+  const btnCreate = document.getElementById('btn-gif-create');
+  const btnReset = document.getElementById('btn-gif-reset');
+  const status = document.getElementById('gif-status');
+  const progressBar = document.getElementById('gif-progress');
+  const progressFill = document.getElementById('gif-progress-fill');
+  const previewWrap = document.getElementById('gif-preview-wrap');
+  const previewImg = document.getElementById('gif-preview-img');
+  const btnDownload = document.getElementById('btn-gif-download');
+
+  let images = []; // { file, img, dataUrl }
+  let gifBlobUrl = null;
+
+  gifDrop.addEventListener('click', function() { gifInput.click(); });
+  gifInput.addEventListener('change', function(e) { addImages(e.target.files); });
+  ['dragenter', 'dragover'].forEach(function(evt) {
+    gifDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); gifDrop.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function(evt) {
+    gifDrop.addEventListener(evt, function(e) { e.preventDefault(); e.stopPropagation(); gifDrop.classList.remove('drag'); });
+  });
+  gifDrop.addEventListener('drop', function(e) { addImages(e.dataTransfer.files); });
+
+  function addImages(fileListObj) {
+    const files = Array.from(fileListObj || []);
+    files.forEach(function(file) {
+      if (!file.type.startsWith('image/')) { alert(file.name + ' — 이미지 파일만 추가할 수 있습니다.'); return; }
+      if (file.size > MAX_BYTES) { alert(file.name + ' — 20MB보다 큰 파일입니다.'); return; }
+      if (images.length >= MAX_IMAGES) { alert('최대 ' + MAX_IMAGES + '장까지 추가할 수 있습니다.'); return; }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          images.push({ file: file, img: img, dataUrl: e.target.result });
+          renderGrid();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderGrid() {
+    gifGrid.innerHTML = images.map(function(entry, i) {
+      return '<div class="img-grid-item" data-idx="' + i + '">' +
+        '<span class="idx-badge">' + (i + 1) + '</span>' +
+        '<button type="button" class="rm-btn" data-act="remove" title="삭제">×</button>' +
+        '<img src="' + entry.dataUrl + '" alt="">' +
+        '<div class="move-row">' +
+          '<button type="button" data-act="up" ' + (i === 0 ? 'disabled' : '') + '>← 이전</button>' +
+          '<button type="button" data-act="down" ' + (i === images.length - 1 ? 'disabled' : '') + '>다음 →</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    btnCreate.disabled = images.length < 2;
+  }
+
+  gifGrid.addEventListener('click', function(e) {
+    const btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    const item = e.target.closest('.img-grid-item');
+    const idx = parseInt(item.dataset.idx, 10);
+    if (btn.dataset.act === 'remove') {
+      images.splice(idx, 1);
+    } else if (btn.dataset.act === 'up' && idx > 0) {
+      const t = images[idx - 1]; images[idx - 1] = images[idx]; images[idx] = t;
+    } else if (btn.dataset.act === 'down' && idx < images.length - 1) {
+      const t = images[idx + 1]; images[idx + 1] = images[idx]; images[idx] = t;
+    }
+    renderGrid();
+  });
+
+  btnReset.addEventListener('click', function() {
+    images = [];
+    gifInput.value = '';
+    status.classList.remove('show');
+    previewWrap.classList.remove('show');
+    progressBar.classList.remove('show');
+    if (gifBlobUrl) { URL.revokeObjectURL(gifBlobUrl); gifBlobUrl = null; }
+    renderGrid();
+  });
+
+  function showStatus(msg, isError) {
+    status.textContent = msg;
+    status.classList.add('show');
+    status.style.color = isError ? '#93392A' : 'var(--accent)';
+  }
+
+  btnCreate.addEventListener('click', function() {
+    if (typeof GIF === 'undefined') { alert('GIF 처리 라이브러리를 불러오지 못했습니다. 잠시 후 새로고침해서 다시 시도해주세요.'); return; }
+    if (images.length < 2) return;
+
+    btnCreate.disabled = true;
+    previewWrap.classList.remove('show');
+    if (gifBlobUrl) { URL.revokeObjectURL(gifBlobUrl); gifBlobUrl = null; }
+
+    const delay = Math.max(20, parseInt(delayInput.value, 10) || 500);
+    const loopVal = parseInt(loopSelect.value, 10);
+    const targetW = parseInt(widthSelect.value, 10);
+
+    const firstImg = images[0].img;
+    const baseRatio = firstImg.naturalWidth / firstImg.naturalHeight;
+    const outW = targetW > 0 ? targetW : firstImg.naturalWidth;
+    const outH = Math.round(outW / baseRatio);
+
+    showStatus('GIF 생성 준비 중...', false);
+    progressBar.classList.add('show');
+    progressFill.style.width = '0%';
+
+    const gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: outW,
+      height: outH,
+      workerScript: GIF_WORKER_SCRIPT,
+      repeat: loopVal === 1 ? -1 : 0 // gif.js: repeat -1 = 재생 1회, 0 = 무한 반복
+    });
+
+    gif.on('progress', function(p) {
+      progressFill.style.width = Math.round(p * 100) + '%';
+      showStatus('GIF 인코딩 중... ' + Math.round(p * 100) + '%', false);
+    });
+
+    gif.on('finished', function(blob) {
+      gifBlobUrl = URL.createObjectURL(blob);
+      previewImg.src = gifBlobUrl;
+      previewWrap.classList.add('show');
+      showStatus('GIF 생성 완료 · ' + images.length + '프레임 · 미리보기를 확인하세요.', false);
+      progressFill.style.width = '100%';
+      btnCreate.disabled = false;
+    });
+
+    // 각 이미지를 동일한 캔버스 크기에 가운데 정렬(letterbox)로 맞춰 프레임 추가
+    images.forEach(function(entry) {
+      const canvas = document.createElement('canvas');
+      canvas.width = outW;
+      canvas.height = outH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, outW, outH);
+      const img = entry.img;
+      const srcRatio = img.naturalWidth / img.naturalHeight;
+      const targetRatio = outW / outH;
+      let dw, dh, dx, dy;
+      if (srcRatio > targetRatio) {
+        dw = outW; dh = dw / srcRatio; dx = 0; dy = (outH - dh) / 2;
+      } else {
+        dh = outH; dw = dh * srcRatio; dy = 0; dx = (outW - dw) / 2;
+      }
+      ctx.drawImage(img, dx, dy, dw, dh);
+      gif.addFrame(canvas, { delay: delay, copy: true });
+    });
+
+    gif.render();
+  });
+
+  btnDownload.addEventListener('click', function() {
+    if (!gifBlobUrl) return;
+    const a = document.createElement('a');
+    a.href = gifBlobUrl;
+    a.download = 'animated-' + Date.now() + '.gif';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+})();
+</script>
+</body>
+</html>
