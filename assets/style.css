@@ -69,6 +69,22 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 .section-head .more { font-size: 13px; color: var(--muted); white-space: nowrap; transition: color .2s; }
 .section-head .more:hover { color: var(--accent); }
 
+/* category quick-nav pills (insights.html) */
+.cat-pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 30px 0 6px; }
+.cat-pills a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--ink-soft);
+  background: var(--paper-2); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 8px 18px;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.cat-pills a .n { font-family: var(--mono); font-size: 11px; color: var(--muted-2); transition: color .2s; }
+.cat-pills a:hover, .cat-pills a:focus-visible {
+  color: #fff; background: var(--accent); border-color: var(--accent);
+}
+.cat-pills a:hover .n, .cat-pills a:focus-visible .n { color: rgba(255,255,255,.75); }
+section[id] { scroll-margin-top: 84px; }
+
 /* ---------- Header ---------- */
 
 .site-header {
@@ -286,6 +302,37 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 .callout p:last-child { margin-bottom: 0; }
 
 .article-foot { max-width: var(--read); border-top: 1px solid var(--ink); margin-top: 46px; padding: 34px 0 0; }
+
+/* ---------- TOC ---------- */
+.toc { max-width: var(--read); margin: 32px 0 8px; padding: 20px 24px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 4px; }
+.toc .toc-label { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-weight: 600; }
+.toc ol { margin: 0; padding-left: 20px; }
+.toc li { margin-bottom: 7px; font-size: 14.5px; }
+.toc a { color: var(--ink-soft); border-bottom: none; }
+.toc a:hover { color: var(--accent); }
+
+/* ---------- Inline figures ---------- */
+.prose figure { margin: 36px 0; }
+.prose figure img { width: 100%; border-radius: 8px; display: block; }
+.prose figcaption { margin-top: 10px; font-size: 13.5px; color: var(--muted); text-align: center; font-style: italic; }
+.fig-placeholder {
+  margin: 36px 0; border: 1px dashed var(--rule); border-radius: 8px;
+  background: var(--paper-2); padding: 36px 24px; text-align: center;
+}
+.fig-placeholder .ph-icon { font-size: 26px; margin-bottom: 10px; opacity: .45; }
+.fig-placeholder .ph-caption { font-size: 13.5px; color: var(--muted); font-style: italic; }
+.fig-placeholder .ph-note { font-size: 10.5px; color: var(--muted-2); margin-top: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---------- Author + CTA foot ---------- */
+.author-line { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--rule-soft); }
+.author-line .av {
+  width: 44px; height: 44px; border-radius: 50%; flex: none;
+  background: var(--ink); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-weight: 600; font-size: 16px;
+}
+.author-line .who strong { display: block; font-size: 14.5px; color: var(--ink); }
+.author-line .who span { font-size: 12.5px; color: var(--muted); }
 
 /* ---------- Form ---------- */
 
